@@ -1,0 +1,14 @@
+@font-face {
+    font-family: "irsans";
+    src: url("../fonts/irsans_p30download.com.ttf");
+}
+
+html, body, .tooltip, .popover {
+  font-family: "irsans"
+}
+code, kbd, pre, samp, .text-monospace {
+  font-family: "irsans"
+}
+button, input, optgroup, select, textarea {
+  font-family: inherit
+}
