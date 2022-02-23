@@ -1,7 +1,7 @@
 # this is consultation system for mohajer university.
 
 ### TODO
-- [ ] design hompage
+- [ ] design homepage
 - [ ] design consulation page
 - [ ] add forms to consulation page
 - [ ] user authentication for workers
