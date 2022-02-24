@@ -5,7 +5,9 @@
 - [X] user authentication for workers
 - [X] create login and logout
 - [X] create signup for registration users
-- [ ] improve user authentication forms
+- [X] improve signup authentication forms
+- [ ] improve login authentication forms
+- [ ] error message for login form
 - [ ] improve homepage design
 - [ ] design consulation page
 - [ ] add forms to consulation page

@@ -4,6 +4,7 @@
 {% block title %}مشاوره مهاجر{% endblock %}
 
 {% block content %}
+{% include 'snippets/message.html' %}
 <img class="img-fluid mb-3" src="{% static 'imgs/mohajer.jpg' %}" alt="mohajer">
 <div class="container">
     <p>
@@ -11,11 +12,11 @@
         داشته باشند و خروجی اکسل از آن ها تهیه کنند، سایت در حال گسترش و تکمیل شدن است و این صرفاً یک نسخه ابتدایی است.
     </p>
     {% if user.is_authenticated %}
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-secondary" role="alert">
             <h5>خوش آمدید {{ user.username }}</h5>
         </div>
     {% else %}
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-secondary" role="alert">
             <h5>خوش آمدید، اگر حساب کاربری دارید وارد بشید در غیر اینصورت میتوانید ثبت نام کنید</h5>
             <a href="{% url 'moshavere:signup' %}">ثبت نام</a>&nbsp;
             <a href="{% url 'moshavere:login' %}">ورود</a>

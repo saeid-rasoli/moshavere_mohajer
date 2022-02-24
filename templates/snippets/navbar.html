@@ -3,7 +3,7 @@
     <div class="container-flex">
         <a class="navbar-brand" style="font-size: 1em;" href="{% url 'moshavere:index' %}">مشاوره مهاجر</a>
         {% if user.is_authenticated %}
-            <a class="btn btn-sm btn-secondary" style="margin-left: 6px;">{{ user.username }}</a>
+            <a class="btn btn-sm btn-secondary" style="margin-left: 6px;" href="{% url 'moshavere:employee' %}">{{ user.username }}</a>
             <a class="btn btn-sm btn-danger" style="margin-left: 6px;" href="{% url 'moshavere:logout' %}">خروج</a>
         {% else %}
             <a class="btn btn-sm btn-warning" style="margin-left: 6px;" href="{% url 'moshavere:signup' %}">ثبت نام</a>

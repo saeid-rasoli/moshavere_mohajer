@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-4">
+    {% if user.employee.meli_code %}
+    <p>نام کاربری: {{ user.username }}</p>
+    <p>نام: {{ user.first_name }}</p>
+    <p>نام خانوادگی: {{ user.last_name }}</p>
+    <p>کد ملی: {{ user.employee.meli_code }}</p>
+    <p>شغل: {{ user.employee.job }}</p>
+    {% else %}
+    <form action="" method="POST">{% csrf_token %}
+        {{ form.as_p }}
+
+        <button class="btn btn-success" type="submit">ثبت</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

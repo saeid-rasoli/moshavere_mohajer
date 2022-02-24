@@ -7,11 +7,14 @@
     <p>لطفا اطلاعات خود را وارد کنید</p>
     <form action="" method="POST">{% csrf_token %}
         {% for field in form %}
-            <p>{{ field.label }}: <br> {{ field }}</p>
+        <p>{{ field.label }}: <br> {{ field }}</p>
 
-            {% for error in field.errors %}
-                <small style="color: red">{{ error }}</small>
-            {% endfor %}
+        {% for error in field.errors %}
+        <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <small dir="ltr">{{ error|escape }}</small>
+        </div>
+        {% endfor %}
         {% endfor %}
         <button class="btn btn-success" type="submit">ثبت نام</button>
     </form>
