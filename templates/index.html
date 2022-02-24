@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}index page{% endblock %}
+{% block title %}مشاوره مهاجر{% endblock %}
 
 {% block content %}
-<h2>سایت مهاجر برای پروژه و ساخت یک سایت مشاوره دانشجویان</h2>
+<img class="img-fluid mb-3" src="{% static 'imgs/mohajer.jpg' %}" alt="mohajer">
+<div class="container">
+    <p>سایت مهاجر برای پروژه و ساخت یک سایت مشاوره دانشجویان</p>
+</div>
 {% endblock %}

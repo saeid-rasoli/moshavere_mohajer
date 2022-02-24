@@ -18,6 +18,10 @@
 
     {% block content %}
     {% endblock %}
+
+    <!-- for pushing footer to the bottom of the screen -->
+    <div style="margin-bottom: 200px;"></div>
+    {% include 'snippets/footer.html' %}
     <!-- bootstrap JS -->
     <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
 </body>

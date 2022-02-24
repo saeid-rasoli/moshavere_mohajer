@@ -1,5 +1,9 @@
-<nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'moshavere:index' %}">مشاوره مهاجر</a>
+<nav class="navbar navbar-dark bg-dark p-1">
+    <div class="container">
+    <div class="container-flex">
+        <a class="navbar-brand" style="font-size: 1em;" href="{% url 'moshavere:index' %}">مشاوره مهاجر</a>
+        <a class="btn btn-sm btn-warning" style="margin-left: 6px;" href="{% url 'moshavere:signup' %}">ثبت نام</a>
+        <a class="btn btn-sm btn-success" href="{% url 'moshavere:login' %}">ورود</a>
+    </div>
     </div>
 </nav>
