@@ -1,0 +1,7 @@
+{% for message in messages %}
+<div class="container-fluid p-0 text-center">
+  <div class="alert {{ message.tags }} p-3" role="alert" >
+    {{ message }}
+  </div>
+</div>
+{% endfor %}

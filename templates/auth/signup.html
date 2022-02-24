@@ -3,7 +3,17 @@
 {% block title %}ثبت نام{% endblock %}
 
 {% block content %}
-<div class="container">
-    <p>ثبت نام</p>
+<div class="container my-4">
+    <p>لطفا اطلاعات خود را وارد کنید</p>
+    <form action="" method="POST">{% csrf_token %}
+        {% for field in form %}
+            <p>{{ field.label }}: <br> {{ field }}</p>
+
+            {% for error in field.errors %}
+                <small style="color: red">{{ error }}</small>
+            {% endfor %}
+        {% endfor %}
+        <button class="btn btn-success" type="submit">ثبت نام</button>
+    </form>
 </div>
 {% endblock %}

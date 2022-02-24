@@ -9,7 +9,7 @@
     <!-- bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.rtl.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom_font.css' %}">
-    <link rel="icon" href="#">
+    <link rel="icon" href="{% static 'imgs/mohajer_favicon.ico' %}">
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
     {% endblock %}
 
     <!-- for pushing footer to the bottom of the screen -->
-    <div style="margin-bottom: 200px;"></div>
+    <div style="margin-bottom: 150px;"></div>
     {% include 'snippets/footer.html' %}
     <!-- bootstrap JS -->
     <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>

@@ -1,8 +1,12 @@
 # this is consultation system for mohajer university.
 
 ### TODO
-- [ ] design homepage
+- [X] design homepage
+- [X] user authentication for workers
+- [X] create login and logout
+- [X] create signup for registration users
+- [ ] improve user authentication forms
+- [ ] improve homepage design
 - [ ] design consulation page
 - [ ] add forms to consulation page
-- [ ] user authentication for workers
 - [ ] export excel file from submited forms
