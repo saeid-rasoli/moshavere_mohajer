@@ -1,8 +1,11 @@
 from django import forms
-from django.forms import ModelForm
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import (AuthenticationForm, UserCreationForm,
+                                       UsernameField)
 from django.contrib.auth.models import User
+from django.forms import ModelForm
+
 from .models import Employee
+
 
 class UserSignupForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
@@ -39,7 +42,7 @@ class UserSignupForm(UserCreationForm):
             raise forms.ValidationError('رمز ها با هم همخوانی ندارند')
         elif len(password2) < 8:
             raise forms.ValidationError('حداقل رمز باید شامل ۸ کاراکتر باشد')
-    
+
     def clean_username(self):
         username = self.cleaned_data['username']
 
@@ -66,3 +69,18 @@ class EmployeeForm(ModelForm):
     class Meta:
         model = Employee
         fields = ['meli_code', 'job']
+
+
+class UserLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(UserLoginForm, self).__init__(*args, **kwargs)
+
+    username = UsernameField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'نام کاربری به انگلیسی'}))
+    username.label = 'نام کاربری'
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'class': 'form-control',
+        }
+    ))
+    password.label = 'رمز عبور'
