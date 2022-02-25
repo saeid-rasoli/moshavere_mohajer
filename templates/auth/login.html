@@ -4,13 +4,23 @@
 
 {% block content %}
 {% include 'snippets/message.html' %}
-<div class="container my-4">
-    <p>در این قسمت میتوانید وارد حساب کاربری خود شوید</p>
-    <form action="" method="POST">{% csrf_token %}
-        {% for field in form %}
-        <p>{{ field.label }}: <br> {{field}}</p>
-        {% endfor %}
-        <button class="btn btn-success" type="submit">ورود</button>
-    </form>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-6">
+            <p>در این قسمت میتوانید وارد حساب کاربری خود شوید</p>
+            <form action="" method="POST">{% csrf_token %}
+                {% for field in form %}
+                <p>{{ field.label }}: <br> {{field}}</p>
+                {% endfor %}
+                {% if form.errors %}
+                <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <small>نام کاربری یا رمز عبور اشتباه است</small>
+                </div>
+                {% endif %}
+                <button class="btn btn-success" type="submit">ورود</button>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

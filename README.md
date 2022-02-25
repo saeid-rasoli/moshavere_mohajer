@@ -6,9 +6,9 @@
 - [X] create login and logout
 - [X] create signup for registration users
 - [X] improve signup authentication forms
-- [ ] improve login authentication forms
-- [ ] error message for login form
-- [ ] improve homepage design
+- [X] improve login authentication forms
+- [X] error message for login form
 - [ ] design consulation page
 - [ ] add forms to consulation page
 - [ ] export excel file from submited forms
+- [ ] improve homepage design

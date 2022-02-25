@@ -73,6 +73,7 @@ class EmployeeForm(ModelForm):
 
 class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
+        self.error_messages['invalid_login'] = 'Custom error'
         super(UserLoginForm, self).__init__(*args, **kwargs)
 
     username = UsernameField(widget=forms.TextInput(
