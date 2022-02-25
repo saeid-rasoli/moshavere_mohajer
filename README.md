@@ -13,10 +13,10 @@ django-jalali-date
 - [X] error message for login form
 - [X] error message for employee form
 - [X] create new field to employee for admin authorize
-- [ ] design consulation page
+- [X] design consulation page
+- [X] add forms to consulation page
+- [X] navbar buttons dropdown menu
 - [ ] design supervisor page
-- [ ] add forms to consulation page
 - [ ] export excel file from submited forms
 - [ ] improve homepage design
 - [ ] 404 page
-- [ ] navbar buttons dropdown menu
