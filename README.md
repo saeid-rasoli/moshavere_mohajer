@@ -1,7 +1,7 @@
 # this is consultation system for mohajer university.
 
 ### requirement
-django-jalali-date
+- django-jalali-date
 
 ### TODO
 - [X] design homepage
