@@ -4,30 +4,28 @@
 
 {% block content %}
 <div class="container my-5">
-    {% if user.employee.meli_code %}
-    <p>نام کاربری: {{ user.username }}</p>
-    <p>نام: {{ user.first_name }}</p>
-    <p>نام خانوادگی: {{ user.last_name }}</p>
-    <p>کد ملی: {{ user.employee.meli_code }}</p>
-    <p>شغل: {{ user.employee.job }}</p>
-    <p>تایید شده:
-        {% if user.employee.is_authorized == False %}
-        خیر
-        {% else %}
-        بله
-        {% endif %}
-    </p>
-    {% else %}
-    <form action="" method="POST">{% csrf_token %}
-        {% for error in form.errors.values %}
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            <small>{{ error|escape }}</small>
+    <div class="row">
+        <div class="col-sm-6">
+            {% if user.employee.meli_code %}
+            <p>نام کاربری: {{ user.username }}</p>
+            <p>نام: {{ user.first_name }}</p>
+            <p>نام خانوادگی: {{ user.last_name }}</p>
+            <p>کد ملی: {{ user.employee.meli_code }}</p>
+            <p>شغل: {{ user.employee.job }}</p>
+            <p>تایید شده:
+                {% if user.employee.is_authorized == False %}
+                خیر
+                {% else %}
+                بله
+                {% endif %}
+            </p>
+            {% else %}
+            <form action="" method="POST">{% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-success" type="submit">ثبت</button>
+            </form>
+            {% endif %}
         </div>
-        {% endfor %}{{ form.as_p }}
-
-        <button class="btn btn-success" type="submit">ثبت</button>
-    </form>
-    {% endif %}
+    </div>
 </div>
 {% endblock %}

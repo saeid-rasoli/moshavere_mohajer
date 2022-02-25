@@ -1,5 +1,8 @@
 # this is consultation system for mohajer university.
 
+### requirement
+django-jalali-date
+
 ### TODO
 - [X] design homepage
 - [X] user authentication for workers

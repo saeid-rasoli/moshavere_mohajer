@@ -4,7 +4,9 @@ from django.contrib.auth.forms import (AuthenticationForm, UserCreationForm,
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
-from .models import Employee
+from .models import Employee, Consulation
+from jalali_date.fields import JalaliDateField
+from jalali_date.widgets import AdminJalaliDateWidget
 
 
 class UserSignupForm(UserCreationForm):
@@ -69,14 +71,15 @@ class EmployeeForm(ModelForm):
     class Meta:
         model = Employee
         fields = ['meli_code', 'job']
-    
+
     def clean(self):
         meli_code = str(self.cleaned_data['meli_code'])
 
         if len(meli_code) != 10:
             raise forms.ValidationError('کُد ملی نا معتبر')
-        
-
+        elif Employee.objects.filter(meli_code=meli_code).exists():
+            raise forms.ValidationError(
+                'کاربری با این کُد ملی قبلا ثبت نام کرده است')
 
 
 class UserLoginForm(AuthenticationForm):
@@ -93,3 +96,65 @@ class UserLoginForm(AuthenticationForm):
         }
     ))
     password.label = 'رمز عبور'
+
+
+class ConsulationForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ConsulationForm, self).__init__(*args, **kwargs)
+        self.fields['mashroot_len'].label = 'تعداد ترم های مشروطی'
+        self.fields['mashroot_len'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['moadel'].label = 'معدل'
+        self.fields['moadel'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['arzyabi'].label = 'ارزیابی و تشخیص مشاور'
+        self.fields['arzyabi'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['erja_moshavere_tahsili'].label = 'ارجاع مشاوره تحصیلی'
+        self.fields['erja_moshavere_tahsili'].widget.attrs.update({
+            'class': 'form-check-input'
+        })
+        self.fields['erja_moshavere_shoghli'].label = 'ارجاع مشاوره شغلی'
+        self.fields['erja_moshavere_shoghli'].widget.attrs.update({
+            'class': 'form-check-input'
+        })
+        self.fields['erja_moshavere_balini'].label = 'ارجاع مشاوره بالینی'
+        self.fields['erja_moshavere_balini'].widget.attrs.update({
+            'class': 'form-check-input'
+        })
+        self.fields['hozor'].label = 'حضور'
+        self.fields['hozor'].widget.attrs.update({
+            'class': 'form-check-input'
+        })
+        self.fields['model_term_baad'].label = 'معدل ترم بعد'
+        self.fields['model_term_baad'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['moshkel_asli'].label = 'مشکل اصلی'
+        self.fields['moshkel_asli'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['neshanehaye_raftari'].label = 'نشانه های رفتاری'
+        self.fields['neshanehaye_raftari'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['ahdaf_modakhele'].label = 'اهداف مداخله'
+        self.fields['ahdaf_modakhele'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['farayande_modakhele'].label = 'فرایند مداخله'
+        self.fields['farayande_modakhele'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['nobat'] = JalaliDateField(label=('نوبت'),
+                                               widget=AdminJalaliDateWidget,
+                                               )
+        self.fields['nobat'].widget.attrs.update({'class': 'form-control jalali_date-date',
+                                                  'placeholder': 'برای انتخاب تاریخ کلیک کنید'})
+
+    class Meta:
+        model = Consulation
+        exclude = ['author']

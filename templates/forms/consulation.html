@@ -5,36 +5,17 @@
 {% block content%}
 <!-- مشاور -->
 {% if employee.is_authorized == True and employee.job == 'مشاور' %}
-<div class="container py-5">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-9">
+            <form action="" method="POST">{% csrf_token %}
+                {{ form.as_p }}
+                {{ form.media }}
+
+                <button type="submit" class="btn btn-success">ثبت</button>
+        </div>
+    </div>
+    </form>
 </div>
 <!-- ناظر -->
 {% elif employee.is_authorized == True and employee.job == 'ناظر' %}
@@ -44,13 +25,13 @@
 <!-- تایید نشده -->
 {% else %}
 <div class="container py-5">
-<p>کاربری
-    {{ employee.user }}
-    هنوز به عنوان
-    {{ employee }} 
-    تایید نشده است
-</p>
-<p>لطفا منتظر باشید</p>
+    <p>کاربری
+        {{ employee.user }}
+        هنوز به عنوان
+        {{ employee }}
+        تایید نشده است
+    </p>
+    <p>لطفا منتظر باشید</p>
 </div>
 {% endif %}
 {% endblock %}

@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect, render
-from .forms import UserSignupForm, EmployeeForm
+from .forms import UserSignupForm, EmployeeForm, ConsulationForm
 from django.contrib.auth.decorators import login_required
 from .models import Employee
 
@@ -51,10 +51,26 @@ def employee(request):
     }
     return render(request, 'profile/employee.html', context)
 
+
 @login_required
 def consulation(request):
+    success_message = 'فرم شما با موفقیت ثبت شد'
     employee_model = Employee.objects.filter(user=request.user).first()
+    form = ConsulationForm()
+    if request.method == 'POST':
+        form = ConsulationForm(request.POST or None)
+        if form.is_valid():
+            user = request.user
+            instance = form.save(commit=False)
+            instance.author = user.employee
+            instance.save()
+            messages.add_message(request, messages.SUCCESS, success_message)
+            return redirect('moshavere:index')
+    else:
+        form = ConsulationForm()
+
     context = {
-        'employee': employee_model
+        'employee': employee_model,
+        'form': form
     }
     return render(request, 'forms/consulation.html', context)

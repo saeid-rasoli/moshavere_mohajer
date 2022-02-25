@@ -1,17 +1,31 @@
+{% load static %}
+
 <nav class="navbar navbar-dark bg-dark p-1">
     <div class="container">
     <div class="container-flex">
+        <img src="{% static '/imgs/mohajer_favicon.ico' %}" alt="" width="24" height="24">
         <a class="navbar-brand" style="font-size: 1em;" href="{% url 'moshavere:index' %}">مشاوره مهاجر</a>
-        {% if user.is_authenticated %}
-            <a class="btn btn-sm btn-secondary" style="margin-left: 6px;" href="{% url 'moshavere:employee' %}">{{ user.username }}</a>
-        {% if user.is_authenticated and user.employee.is_authorized == True %}
-            <a class="btn btn-sm btn-primary" style="margin-left: 6px;" href="{% url 'moshavere:consulation' %}">{{ user.employee }}</a>
-        {% endif %}
-            <a class="btn btn-sm btn-danger" style="margin-left: 6px;" href="{% url 'moshavere:logout' %}">خروج</a>
-        {% else %}
-            <a class="btn btn-sm btn-warning" style="margin-left: 6px;" href="{% url 'moshavere:signup' %}">ثبت نام</a>
-            <a class="btn btn-sm btn-success" href="{% url 'moshavere:login' %}">ورود</a>
-        {% endif %}
     </div>
+    <li class="nav-item dropdown">
+        <a class="btn btn-success btn-sm dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            منو
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        {% if user.is_authenticated %}
+            <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:employee' %}">پروفایل</a></li>
+        {% if user.is_authenticated and user.employee.is_authorized == True %}
+            <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:consulation' %}">{{ user.employee }}</a></li>
+        {% endif %}
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:logout' %}">خروج</a></li>
+        {% else %}
+            <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:signup' %}">ثبت نام</a></li>
+            <li><a class="dropdown-item" href="{% url 'moshavere:login' %}">ورود</a></li>
+        {% endif %}
+        </ul>
+    </li>
     </div>
 </nav>
