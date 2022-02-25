@@ -69,6 +69,14 @@ class EmployeeForm(ModelForm):
     class Meta:
         model = Employee
         fields = ['meli_code', 'job']
+    
+    def clean(self):
+        meli_code = str(self.cleaned_data['meli_code'])
+
+        if len(meli_code) != 10:
+            raise forms.ValidationError('کُد ملی نا معتبر')
+        
+
 
 
 class UserLoginForm(AuthenticationForm):
