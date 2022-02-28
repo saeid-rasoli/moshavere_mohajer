@@ -16,7 +16,7 @@
 - [X] design consulation page
 - [X] add forms to consulation page
 - [X] navbar buttons dropdown menu
-- [ ] design supervisor page
+- [X] design supervisor page
 - [ ] export excel file from submited forms
 - [ ] improve homepage design
 - [ ] 404 page
