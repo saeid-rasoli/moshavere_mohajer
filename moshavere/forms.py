@@ -157,4 +157,4 @@ class ConsulationForm(forms.ModelForm):
 
     class Meta:
         model = Consulation
-        exclude = ['author']
+        exclude = ['author', 'slug']

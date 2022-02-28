@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect, render
 from .forms import UserSignupForm, EmployeeForm, ConsulationForm
 from django.contrib.auth.decorators import login_required
-from .models import Employee
+from .models import Employee, Consulation
 
 
 def index(request):
@@ -56,6 +56,7 @@ def employee(request):
 def consulation(request):
     success_message = 'فرم شما با موفقیت ثبت شد'
     employee_model = Employee.objects.filter(user=request.user).first()
+    consulation_model = Consulation.objects.all()
     form = ConsulationForm()
     if request.method == 'POST':
         form = ConsulationForm(request.POST or None)
@@ -71,6 +72,14 @@ def consulation(request):
 
     context = {
         'employee': employee_model,
-        'form': form
+        'form': form,
+        'consulation': consulation_model
     }
     return render(request, 'forms/consulation.html', context)
+
+def consulation_detail(request, slug, pk):
+    consulation_detail_model = Consulation.objects.filter(slug=slug, pk=pk).first()
+    context = {
+        'consulation_detail': consulation_detail_model
+    }
+    return render(request, 'forms/consulation_detail.html', context)

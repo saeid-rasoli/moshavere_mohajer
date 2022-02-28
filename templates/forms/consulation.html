@@ -1,35 +1,20 @@
 {% extends 'base.html' %}
 
-{% block title%}consulation{% endblock %}
+{% block title%}مشاوره{% endblock %}
 
 {% block content%}
 <!-- مشاور -->
 {% if employee.is_authorized == True and employee.job == 'مشاور' %}
-<div class="container my-5">
-    <div class="row">
-        <div class="col-sm-9">
-            <form action="" method="POST">{% csrf_token %}
-                {{ form.as_p }}
-                {{ form.media }}
-
-                <button type="submit" class="btn btn-success">ثبت</button>
-        </div>
-    </div>
-    </form>
-</div>
+{% include 'forms/moshaver.html' %}
 <!-- ناظر -->
 {% elif employee.is_authorized == True and employee.job == 'ناظر' %}
-<div class="container py-5">
-    <p>ناظر</p>
-</div>
+{% include 'forms/nazer.html' %}
 <!-- تایید نشده -->
 {% else %}
 <div class="container py-5">
     <p>کاربری
-        {{ employee.user }}
-        هنوز به عنوان
-        {{ employee }}
-        تایید نشده است
+        {{ request.user }}
+        هنوز تایید نشده است
     </p>
     <p>لطفا منتظر باشید</p>
 </div>

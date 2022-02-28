@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load jalali_tags %}
+
+{% block title %}{{ consulation_detail }}مشاور {% endblock %}
+{% block content %}
+<div class="container my-5">
+    <table class="table table-striped table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <th>عنوان</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>مشاور:</th>
+                <td>{{ consulation_detail.author.user.first_name }} {{ consulation_detail.author.user.last_name }}</td>
+            </tr>
+            <tr>
+                <th>تعداد ترم های مشروطی:</th>
+                <td>{{ consulation_detail.mashroot_len }}</td>
+            </tr>
+            <tr>
+                <th>معدل:</th>
+                <td>{{ consulation_detail.moadel }}</td>
+            </tr>
+            <tr>
+                <th>ارزیابی:</th>
+                <td>{{ consulation_detail.arzyabi }}</td>
+            </tr>
+            <tr>
+                <th>ارجاع به مشاوره تحصیلی:</th>
+                <td>{% if consulation_detail.erja_moshavere_tahsili == True %}بله{% else %}خیر{% endif %}</td>
+            </tr>
+            <tr>
+                <th>ارجاع به مشاوره شغلی:</th>
+                <td>{% if consulation_detail.erja_moshavere_shoghli == True %}بله{% else %}خیر{% endif %}</td>
+            </tr>
+            <tr>
+                <th>ارجاع به مشاوره بالینی:</th>
+                <td>{% if consulation_detail.erja_moshavere_balini == True %}بله{% else %}خیر{% endif %}</td>
+            </tr>
+            <tr>
+                <th>نوبت:</th>
+                <td>{{ consulation_detail.nobat|to_jalali:'%y/%m/%d' }}</td>
+            </tr>
+            <tr>
+                <th>حضور:</th>
+                <td>{% if consulation_detail.hozor == True %}بله{% else %}خیر{% endif %}</td>
+            </tr>
+            <tr>
+                <th>معدل ترم بعد:</th>
+                <td>{{ consulation_detail.model_term_baad }}</td>
+            </tr>
+            <tr>
+                <th>مشکل اصلی:</th>
+                <td>{{ consulation_detail.moshkel_asli }}</td>
+            </tr>
+            <tr>
+                <th>نشانه های رفتاری:</th>
+                <td>{{ consulation_detail.neshanehaye_raftari }}</td>
+            </tr>
+            <tr>
+                <th>اهداف مداخله:</th>
+                <td>{{ consulation_detail.ahdaf_modakhele }}</td>
+            </tr>
+            <tr>
+                <th>فرایند مداخله:</th>
+                <td>{{ consulation_detail.farayande_modakhele }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <button class="btn btn-success">خروجی اکسل</button>
+</div>
+{% endblock %}

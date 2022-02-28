@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.template.defaultfilters import slugify
 
 JOB_CHOICES = (
     ('مشاور', 'مشاور'),
@@ -35,10 +36,18 @@ class Consulation(models.Model):
     nobat = models.DateField(default=timezone.now)
     hozor = models.BooleanField(default=False)
     model_term_baad = models.DecimalField(default=0, decimal_places=2, max_digits=4)
-    moshkel_asli = models.TextField(max_length=500, blank=True)
-    neshanehaye_raftari = models.TextField(max_length=500, blank=True)
-    ahdaf_modakhele = models.TextField(max_length=500, blank=True)
-    farayande_modakhele = models.TextField(max_length=500, blank=True)
+    moshkel_asli = models.TextField(max_length=9000, blank=True)
+    neshanehaye_raftari = models.TextField(max_length=9000, blank=True)
+    ahdaf_modakhele = models.TextField(max_length=9000, blank=True)
+    farayande_modakhele = models.TextField(max_length=9000, blank=True)
+    slug = models.SlugField(max_length=200, allow_unicode=True, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.id or not self.slug:
+            slug_name = f'{self.author.user.username}-{self.nobat}'
+            self.slug = slugify(slug_name)
+
+        super(Consulation, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.author.user.username
