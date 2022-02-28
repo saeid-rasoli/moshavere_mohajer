@@ -1,7 +1,8 @@
 # this is consultation system for mohajer university.
 
-### requirement
+### pip requirement
 - django-jalali-date
+- XlsxWriter
 
 ### TODO
 - [X] design homepage
@@ -17,6 +18,7 @@
 - [X] add forms to consulation page
 - [X] navbar buttons dropdown menu
 - [X] design supervisor page
-- [ ] export excel file from submited forms
+- [X] add created date for consulation
+- [X] export excel file from submited forms
 - [ ] improve homepage design
 - [ ] 404 page

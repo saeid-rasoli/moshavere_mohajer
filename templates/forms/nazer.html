@@ -12,6 +12,7 @@
                         <th scope="col">مشاور</th>
                         <th scope="col">تاریخ نوبت</th>
                         <th scope="col">معدل دانشجو</th>
+                        <th scope="col">زمان ثبت فرم</th>
                         <th scope="col">نمایش کامل</th>
                     </tr>
                 </thead>
@@ -22,7 +23,8 @@
                         <td>{{ record.author.user.first_name }} {{ record.author.user.last_name }}</td>
                         <td>{{ record.nobat|to_jalali:'%y/%m/%d'}}</td>
                         <td>{{ record.moadel }}</td>
-                        <td><a href="{% url 'moshavere:consulation_detail' pk=record.id slug=record.slug %}" class="btn btn-success btn-sm">ادامه فرم</a></td>
+                        <td>{{ record.created_date|to_jalali:'%y/%m/%d - %H:%M:%S'}}</td>
+                        <td><a href="{% url 'moshavere:consulation_detail' slug=record.slug %}" class="btn btn-success btn-sm">ادامه فرم</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>

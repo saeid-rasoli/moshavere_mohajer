@@ -27,6 +27,7 @@ class Employee(models.Model):
 
 class Consulation(models.Model):
     author = models.OneToOneField(Employee, on_delete=models.CASCADE)
+    created_date = models.DateTimeField(auto_now_add=True)
     mashroot_len = models.IntegerField(default=0)
     moadel = models.DecimalField(default=0, decimal_places=2, max_digits=4)
     arzyabi = models.CharField(max_length=20, choices=ARZYABI_CHOICES, default='عادی')
@@ -44,7 +45,7 @@ class Consulation(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id or not self.slug:
-            slug_name = f'{self.author.user.username}-{self.nobat}'
+            slug_name = f'{self.author.user.username}-{self.nobat}-{self.pk}'
             self.slug = slugify(slug_name)
 
         super(Consulation, self).save(*args, **kwargs)
