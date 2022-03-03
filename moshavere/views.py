@@ -116,23 +116,37 @@ def export_form(request, slug):
         hozor = 'بله'
     else:
         hozor = 'خیر'
+
+    header_format = workbook.add_format({'bg_color': 'yellow', 'align': 'center', 'font_size': 13})
+    value_format = workbook.add_format({'bg_color': '#8fe7ff', 'align': 'center', 'font_size': 13})
     for i in range(len(headers)):
-        worksheet.write(f'{cols[i]}1', f'{headers[i]}')
-    worksheet.write('A2', consulation_detail_model.author.user.username)
-    worksheet.write('B2', consulation_detail_model.mashroot_len)
-    worksheet.write('C2', consulation_detail_model.moadel)
-    worksheet.write('D2', consulation_detail_model.arzyabi)
-    worksheet.write('E2', cdt)
-    worksheet.write('F2', cds)
-    worksheet.write('G2', cdb)
-    worksheet.write('H2', consulation_detail_model.nobat)
-    worksheet.write('I2', hozor)
-    worksheet.write('J2', consulation_detail_model.model_term_baad)
-    worksheet.write('K2', consulation_detail_model.moshkel_asli)
-    worksheet.write('L2', consulation_detail_model.neshanehaye_raftari)
-    worksheet.write('M2', consulation_detail_model.ahdaf_modakhele)
-    worksheet.write('N2', consulation_detail_model.farayande_modakhele)
+        worksheet.write(f'{cols[i]}1', f'{headers[i]}', header_format)
+
+    worksheet.write('A2', consulation_detail_model.author.user.username, value_format)
+    worksheet.write('B2', consulation_detail_model.mashroot_len, value_format)
+    worksheet.write('C2', consulation_detail_model.moadel, value_format)
+    worksheet.write('D2', consulation_detail_model.arzyabi, value_format)
+    worksheet.write('E2', cdt, value_format)
+    worksheet.write('F2', cds, value_format)
+    worksheet.write('G2', cdb, value_format)
+    worksheet.write('H2', consulation_detail_model.nobat, value_format)
+    worksheet.write('I2', hozor, value_format)
+    worksheet.write('J2', consulation_detail_model.model_term_baad, value_format)
+    worksheet.write('K2', consulation_detail_model.moshkel_asli, value_format)
+    worksheet.write('L2', consulation_detail_model.neshanehaye_raftari, value_format)
+    worksheet.write('M2', consulation_detail_model.ahdaf_modakhele, value_format)
+    worksheet.write('N2', consulation_detail_model.farayande_modakhele, value_format)
+
+    # increase width column
+    worksheet.set_column('A:J', 30)
+    worksheet.set_column('K:N', 90)
     workbook.close()
     buffer.seek(0)
 
-    return FileResponse(buffer, as_attachment=True, filename='report.xlsx')
+    return FileResponse(buffer, as_attachment=True, filename=f'{consulation_detail_model.author.user.username}-form.xlsx')
+
+def bad_request(request, exception=None):
+    return render(request, 'error/404.html', {}, status=404)
+
+def server_error(request, exception=None):
+    return render(request, 'error/500.html', {}, status=500)

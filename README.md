@@ -20,5 +20,6 @@
 - [X] design supervisor page
 - [X] add created date for consulation
 - [X] export excel file from submited forms
+- [X] 404 and 500 page
+- [X] improve excel format
 - [ ] improve homepage design
-- [ ] 404 page

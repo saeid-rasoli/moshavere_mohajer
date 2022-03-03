@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-*^9rqp44_!-ym%cx%c$$a=l_*r_k1t-qsjn@+jhh3wt#%1nj*-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -133,7 +133,7 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
-# default settings
+# default settings for jalali date
 JALALI_DATE_DEFAULTS = {
    'Strftime': {
         'date': '%y/%m/%d',
