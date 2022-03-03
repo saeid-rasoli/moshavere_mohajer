@@ -1,12 +1,15 @@
+import io
+
+import xlsxwriter
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.shortcuts import redirect, render
-from .forms import UserSignupForm, EmployeeForm, ConsulationForm
 from django.contrib.auth.decorators import login_required
-from .models import Employee, Consulation
-import io
-import xlsxwriter
+from django.db.models import Q
 from django.http import FileResponse
+from django.shortcuts import redirect, render
+
+from .forms import ConsulationForm, EmployeeForm, UserSignupForm
+from .models import Consulation, Employee
 
 
 def index(request):
@@ -59,7 +62,21 @@ def employee(request):
 def consulation(request):
     success_message = 'فرم شما با موفقیت ثبت شد'
     employee_model = Employee.objects.filter(user=request.user).first()
-    consulation_model = Consulation.objects.all().order_by('-created_date')
+    search_post = request.GET.get('search')
+    if search_post:
+        if len(search_post.split()) == 2:
+            consulation_model = Consulation.objects.filter(
+                Q(author__user__first_name__startswith=search_post.split()[0]) &
+                Q(author__user__last_name__startswith=search_post.split()[1])
+            )
+        else:
+            consulation_model = Consulation.objects.filter(
+                Q(author__user__first_name__icontains=search_post) |
+                Q(author__user__last_name__icontains=search_post) |
+                Q(author__user__username__icontains=search_post)
+            )
+    else:
+        consulation_model = Consulation.objects.all().order_by('-created_date')
     form = ConsulationForm()
     if request.method == 'POST':
         form = ConsulationForm(request.POST or None)

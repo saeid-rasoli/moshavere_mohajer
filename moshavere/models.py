@@ -22,7 +22,7 @@ class Employee(models.Model):
     is_authorized = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.job
+        return f'{self.user.username}-{self.job}'
 
 
 class Consulation(models.Model):

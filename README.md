@@ -22,4 +22,6 @@
 - [X] export excel file from submited forms
 - [X] 404 and 500 page
 - [X] improve excel format
+- [X] search for consulations in nazer page
+- [ ] page split for consulation page
 - [ ] improve homepage design
