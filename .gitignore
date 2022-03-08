@@ -18,5 +18,4 @@ media
 .history
 
 # custom
-moshavere/data
-*.csv
+moshavere/data/*
