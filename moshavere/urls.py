@@ -17,4 +17,5 @@ urlpatterns = [
     path('consulation/', views.consulation, name='consulation'),
     path('consulation/<slug:slug>/', views.consulation_detail, name='consulation_detail'),
     path('consulation/<slug:slug>/export/', views.export_form, name='export_form'),
+    path('students/', views.students_view, name='students')
 ]

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}students{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <p>لیست دانشجوها</p>
+    <div class="row">
+        <div class="col-sm-6">
+            <form class="form-inline" action="{% url 'moshavere:students' %}">
+                <div class="input-group rounded">
+                <input type="search" class="form-control rounded" placeholder="جستوجو دانشجو" aria-label="Search" aria-describedby="search-addon" type="search" name="search"/>
+                <input class="btn btn-info" type="submit" value="جستوجو">
+                </div>
+            </form>
+        </div>
+    </div>
+    {% for record in records %}
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                        {% for header in headers %}
+                            <th scope="col">{{ header }}</th>
+                        {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                    {% for table in record %}
+                            <td>{{ table }}</td>
+                    {% endfor %}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="pagination my-2">
+        <span class="step-links">
+            {% if records.has_previous %}
+            <a href="?page=1">&laquo;</a>&nbsp;
+            <a href="?page={{ records.previous_page_number }}">صفحه قبل</a>
+            {% endif %}
+
+            <span class="current">
+                {{ records.number }} از {{ records.paginator.num_pages }}.
+            </span>
+
+            {% if records.has_next %}
+            <a href="?page={{ records.next_page_number }}">صفحه بعد</a>
+            &nbsp;<a href="?page={{ records.paginator.num_pages }}">&raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}

@@ -23,5 +23,9 @@
 - [X] 404 and 500 page
 - [X] improve excel format
 - [X] search for consulations in nazer page
+- [X] add students page for consulation employee
+- [X] page split for students page
+- [ ] search for students list
+- [ ] add students page to navbar for consulation employee
 - [ ] page split for consulation page
 - [ ] improve homepage design

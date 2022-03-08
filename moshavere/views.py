@@ -1,4 +1,5 @@
 import io
+from django.core.paginator import Paginator
 
 import xlsxwriter
 from django.contrib import messages
@@ -10,6 +11,7 @@ from django.shortcuts import redirect, render
 
 from .forms import ConsulationForm, EmployeeForm, UserSignupForm
 from .models import Consulation, Employee
+from .scripts import students
 
 
 def index(request):
@@ -167,3 +169,16 @@ def bad_request(request, exception=None):
 
 def server_error(request, exception=None):
     return render(request, 'error/500.html', {}, status=500)
+
+@login_required
+def students_view(request):
+    records = students.records
+    paginator = Paginator(records, 25)
+    page_number = request.GET.get('page')
+    records = paginator.get_page(page_number)
+
+    context = {
+        'headers': students.headers,
+        'records': records
+    }
+    return render(request, 'students/students.html', context)
