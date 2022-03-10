@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
                 ('erja_moshavere_balini', models.BooleanField(default=False)),
                 ('nobat', models.DateField(default=django.utils.timezone.now)),
                 ('hozor', models.BooleanField(default=False)),
-                ('model_term_baad', models.DecimalField(decimal_places=2, default=0, max_digits=4)),
+                ('model_term_ghabl', models.DecimalField(decimal_places=2, default=0, max_digits=4)),
                 ('moshkel_asli', models.TextField(blank=True, max_length=9000)),
                 ('neshanehaye_raftari', models.TextField(blank=True, max_length=9000)),
                 ('ahdaf_modakhele', models.TextField(blank=True, max_length=9000)),

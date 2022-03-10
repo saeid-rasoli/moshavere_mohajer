@@ -16,6 +16,7 @@
             <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:employee' %}">پروفایل</a></li>
         {% if user.is_authenticated and user.employee.is_authorized == True %}
             <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:consulation' %}">{{ user.employee.job }}</a></li>
+            <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:students' %}">دانشجویان</a></li>
         {% endif %}
             <li>
                 <hr class="dropdown-divider">

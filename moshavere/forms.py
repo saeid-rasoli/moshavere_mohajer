@@ -129,8 +129,8 @@ class ConsulationForm(forms.ModelForm):
         self.fields['hozor'].widget.attrs.update({
             'class': 'form-check-input'
         })
-        self.fields['model_term_baad'].label = 'معدل ترم بعد'
-        self.fields['model_term_baad'].widget.attrs.update({
+        self.fields['model_term_ghabl'].label = 'معدل ترم قبل'
+        self.fields['model_term_ghabl'].widget.attrs.update({
             'class': 'form-control'
         })
         self.fields['moshkel_asli'].label = 'مشکل اصلی'

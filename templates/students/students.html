@@ -8,13 +8,38 @@
     <div class="row">
         <div class="col-sm-6">
             <form class="form-inline" action="{% url 'moshavere:students' %}">
-                <div class="input-group rounded">
-                <input type="search" class="form-control rounded" placeholder="جستوجو دانشجو" aria-label="Search" aria-describedby="search-addon" type="search" name="search"/>
-                <input class="btn btn-info" type="submit" value="جستوجو">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="dropdown me-1">
+                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    معدل
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" type="search" name="search" href="?search=+17">بیشتر از ۱۹</a></li>
+                    <li><a class="dropdown-item" type="search" name="search" href="?search=17">بین ۱۷ تا ۱۹</a></li>
+                    <li><a class="dropdown-item" type="search" name="search" href="?search=15">بین ۱۵ تا ۱۷</a></li>
+                    <li><a class="dropdown-item" type="search" name="search" href="?search=13">بین ۱۳ تا ۱۵</a></li>
+                    <li><a class="dropdown-item" type="search" name="search" href="?search=-13">کمتر از ۱۳</a></li>
+                </ul>
                 </div>
+                <div class="dropdown">
+                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    ترم مشروط
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" type="search" name="search" href="?search=1">۱ ترم مشروط</a></li>
+                    <li><a class="dropdown-item" type="search" name="search" href="?search=2">۲ ترم مشروط</a></li>
+                    <li><a class="dropdown-item" type="search" name="search" href="?search=3">۳ ترم مشروط</a></li>
+                </ul>
+                </div>
+
+            </div>
             </form>
         </div>
     </div>
+    {% if len_query %}
+    <br>
+    <p>{{ len_query }} دانشجو پیدا شد</p>
+    {% endif %}
     {% for record in records %}
     <br>
     <div class="row">
@@ -44,7 +69,7 @@
         <span class="step-links">
             {% if records.has_previous %}
             <a href="?page=1">&laquo;</a>&nbsp;
-            <a href="?page={{ records.previous_page_number }}">صفحه قبل</a>
+            <a href="?page={{ records.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">صفحه قبل</a>
             {% endif %}
 
             <span class="current">
@@ -52,7 +77,7 @@
             </span>
 
             {% if records.has_next %}
-            <a href="?page={{ records.next_page_number }}">صفحه بعد</a>
+            <a href="?page={{ records.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">صفحه بعد</a>
             &nbsp;<a href="?page={{ records.paginator.num_pages }}">&raquo;</a>
             {% endif %}
         </span>

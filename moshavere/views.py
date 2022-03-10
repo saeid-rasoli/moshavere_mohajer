@@ -1,10 +1,10 @@
 import io
-from django.core.paginator import Paginator
 
 import xlsxwriter
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import FileResponse
 from django.shortcuts import redirect, render
@@ -150,7 +150,7 @@ def export_form(request, slug):
     worksheet.write('G2', cdb, value_format)
     worksheet.write('H2', consulation_detail_model.nobat, value_format)
     worksheet.write('I2', hozor, value_format)
-    worksheet.write('J2', consulation_detail_model.model_term_baad, value_format)
+    worksheet.write('J2', consulation_detail_model.model_term_ghabl, value_format)
     worksheet.write('K2', consulation_detail_model.moshkel_asli, value_format)
     worksheet.write('L2', consulation_detail_model.neshanehaye_raftari, value_format)
     worksheet.write('M2', consulation_detail_model.ahdaf_modakhele, value_format)
@@ -172,13 +172,37 @@ def server_error(request, exception=None):
 
 @login_required
 def students_view(request):
-    records = students.records
-    paginator = Paginator(records, 25)
+    search_post = request.GET.get('search')
+    records = list()
+    len_query = None
+    if search_post:
+        if search_post == '17' or search_post == '15' or search_post == '13' or search_post == '+17' or search_post == '-13':
+            for record in students.records:
+                if not record[24]:
+                    continue
+                elif float(record[24]) < int(search_post) + 2 and float(record[24]) > int(search_post):
+                    records.append(record)
+                elif search_post == '+17' and float(record[24]) > 17:
+                    records.append(record)
+                elif search_post == '-13' and float(record[24]) < 13:
+                    records.append(record)
+        elif search_post == '1' or search_post == '2' or search_post == '3':
+            for record in students.records:
+                if not record[22]:
+                    continue
+                if int(record[22]) == int(search_post):
+                    records.append(record)
+        len_query = len(records)
+    else:
+        records = students.records
+
+    paginator = Paginator(records, 15)
     page_number = request.GET.get('page')
     records = paginator.get_page(page_number)
 
     context = {
         'headers': students.headers,
-        'records': records
+        'records': records,
+        'len_query': len_query
     }
     return render(request, 'students/students.html', context)

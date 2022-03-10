@@ -25,7 +25,7 @@
 - [X] search for consulations in nazer page
 - [X] add students page for consulation employee
 - [X] page split for students page
-- [ ] search for students list
-- [ ] add students page to navbar for consulation employee
+- [X] add students page to navbar for consulation employee
+- [X] search for students list
 - [ ] page split for consulation page
 - [ ] improve homepage design

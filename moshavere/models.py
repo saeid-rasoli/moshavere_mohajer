@@ -36,7 +36,7 @@ class Consulation(models.Model):
     erja_moshavere_balini = models.BooleanField(default=False)
     nobat = models.DateField(default=timezone.now)
     hozor = models.BooleanField(default=False)
-    model_term_baad = models.DecimalField(default=0, decimal_places=2, max_digits=4)
+    model_term_ghabl = models.DecimalField(default=0, decimal_places=2, max_digits=4)
     moshkel_asli = models.TextField(max_length=9000, blank=True)
     neshanehaye_raftari = models.TextField(max_length=9000, blank=True)
     ahdaf_modakhele = models.TextField(max_length=9000, blank=True)
@@ -45,7 +45,7 @@ class Consulation(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id or not self.slug:
-            slug_name = f'{self.author.user.username}-{self.nobat}-{self.pk}'
+            slug_name = f'{self.author.user.username}-{self.nobat}-{self.id}'
             self.slug = slugify(slug_name)
 
         super(Consulation, self).save(*args, **kwargs)
