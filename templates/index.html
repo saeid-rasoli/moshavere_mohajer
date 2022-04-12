@@ -7,10 +7,6 @@
 {% include 'snippets/message.html' %}
 <img class="img-fluid mb-3" src="{% static 'imgs/mohajer.jpg' %}" alt="mohajer">
 <div class="container">
-    <p>
-        در این سایت مشاور ها فرم های مشاوره دانشجویان را کامل میکنند و کارکنان دانشگاه میتوانند به آن ها دسترسی
-        داشته باشند و خروجی اکسل از آن ها تهیه کنند، سایت در حال گسترش و تکمیل شدن است و این صرفاً یک نسخه ابتدایی است.
-    </p>
     {% if user.is_authenticated %}
         <div class="alert alert-primary" role="alert">
             <p>خوش آمدید {{ user.username }}</p>
@@ -22,37 +18,5 @@
             <a href="{% url 'moshavere:login' %}">ورود</a>
         </div>
     {% endif %}
-    <br>
-    <div class="text-center">
-        لطفا در کادر پایین شهر خود را انتخاب کنید
-    </div>
-    <br>
-</div>
-<div class="alert alert-secondary">
-    <div class="row">
-        <div class="col-sm-4 p-3">
-            از طریق لیست مرکز استان های روبرو میتوانید روی مرکز استان مورد نظر کلیک کنید و مرکز مشاوره خود را در آن استان انتخاب کنید
-        </div>
-        <div class="col-sm-3 p-3">
-            <ul>
-                <li><a href="" style="text-decoration: none;">مشاوره تهران</a></li>
-                <li><a href="" style="text-decoration: none;">مشاوره اصفهان</a></li>
-                <li><a href="" style="text-decoration: none;">مشاوره مشهد</a></li>
-                <li><a href="" style="text-decoration: none;">مشاوره شیراز</a></li>
-                <li><a href="" style="text-decoration: none;">مشاوره سنندج</a></li>
-                <li><a href="" style="text-decoration: none;">مشاوره رشت</a></li>
-            </ul>
-        </div>
-        <div class="col-sm-3 p-3">
-            <ul>
-                <li><a href="" style="text-decoration: none;">مشاوره تبریز</a></li>
-                <li><a href="" style="text-decoration: none;">مشاوره کرمانشاه</a></li>
-                <li><a href="" style="text-decoration: none;">مشاوره ارومیه</a></li>
-                <li><a href="" style="text-decoration: none;">مشاوره اهواز</a></li>
-                <li><a href="" style="text-decoration: none;">مشاوره بوشهر</a></li>
-                <li><a href="" style="text-decoration: none;">مشاوره کرمان</a></li>
-            </ul>
-        </div>
-    </div>
 </div>
 {% endblock %}

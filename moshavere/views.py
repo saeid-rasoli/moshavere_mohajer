@@ -10,7 +10,7 @@ from django.http import FileResponse
 from django.shortcuts import redirect, render
 
 from .forms import ConsulationForm, EmployeeForm
-from .models import Consulation, Employee
+from .models import Consulation, Employee, MarakezMoshavere
 from .scripts import students
 
 
@@ -206,3 +206,11 @@ def students_view(request):
         'len_query': len_query
     }
     return render(request, 'students/students.html', context)
+
+def marakez_moshavere(request, city):
+    marakez_moshavere = MarakezMoshavere.objects.filter(city__name=city).first()
+    context = {
+        'markaz_moshavere': marakez_moshavere
+    }
+
+    return render(request, 'markaz/markaz_moshavere.html', context)

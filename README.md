@@ -25,4 +25,13 @@
 - [X] page split for students page
 - [X] add students page to navbar for consulation employee
 - [X] search for students list
-- [ ] markaz for each province in homepage
+- [X] markaz for each city in esfahan
+- [ ] improve markaz moshave page ui/ux
+- [ ] moshaver update profile with excel file
+- [ ] nazer can add new moshaver
+- [ ] create humberger menu for each city in esfahan
+- [ ] nazer can add new markaz moshavere
+- [ ] improve homepage
+- [ ] about us page and phone number when reserving
+- [ ] moshavers in each city
+

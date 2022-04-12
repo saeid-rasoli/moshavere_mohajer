@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Employee, Consulation
+
+from .models import City, Consulation, Employee, MarakezMoshavere
+
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
@@ -7,4 +9,12 @@ class EmployeeAdmin(admin.ModelAdmin):
 
 @admin.register(Consulation)
 class ConsulationAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(MarakezMoshavere)
+class MarakezMoshavereAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(City)
+class CityAdmin(admin.ModelAdmin):
     pass

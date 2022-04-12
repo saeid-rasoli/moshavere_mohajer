@@ -52,3 +52,20 @@ class Consulation(models.Model):
 
     def __str__(self):
         return self.author.user.username
+
+class City(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+class MarakezMoshavere(models.Model):
+    city = models.OneToOneField(City, on_delete=models.CASCADE, blank=True, null=True)
+    daneshgah_name = models.CharField(max_length=400, blank=True, null=True)
+    daneshgah_code = models.CharField(max_length=50, blank=True, null=True)
+    karbari_markaz_behdasht = models.CharField(max_length=80, blank=True, null=True)
+    karbari_markaz_moshavere = models.CharField(max_length=80, blank=True, null=True)
+
+    def __str__(self):
+        return self.daneshgah_name
+
