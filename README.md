@@ -8,8 +8,6 @@
 - [X] design homepage
 - [X] user authentication for workers
 - [X] create login and logout
-- [X] create signup for registration users
-- [X] improve signup authentication forms
 - [X] improve login authentication forms
 - [X] error message for login form
 - [X] error message for employee form
@@ -27,5 +25,4 @@
 - [X] page split for students page
 - [X] add students page to navbar for consulation employee
 - [X] search for students list
-- [ ] page split for consulation page
-- [ ] improve homepage design
+- [ ] markaz for each province in homepage

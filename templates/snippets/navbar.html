@@ -6,27 +6,45 @@
         <a href="{% url 'moshavere:index' %}"><img src="{% static '/imgs/mohajer_favicon.ico' %}" alt="" width="24" height="24"></a>
         <a class="navbar-brand" style="font-size: 1em;" href="{% url 'moshavere:index' %}">مشاوره مهاجر</a>
     </div>
-    <li class="nav-item dropdown">
-        <a class="btn btn-primary btn-sm dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            منو
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-        {% if user.is_authenticated %}
-            <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:employee' %}">پروفایل</a></li>
-        {% if user.is_authenticated and user.employee.is_authorized == True %}
-            <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:consulation' %}">{{ user.employee.job }}</a></li>
-            <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:students' %}">دانشجویان</a></li>
-        {% endif %}
-            <li>
-                <hr class="dropdown-divider">
+
+    <div class="row">
+        <div class="col m-0 p-0">
+            <li class="nav-item dropdown" style="list-style: none;">
+                <a class="btn btn-success btn-sm dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    مراکز مشاوره
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="">test1</a></li>
+                    <li><a class="dropdown-item" href="">test2</a></li>
+                    <li><a class="dropdown-item" href="">test3</a></li>
+                    <li><a class="dropdown-item" href="">test4</a></li>
+                    <li><a class="dropdown-item" href="">test5</a></li>
+                </ul>
             </li>
-            <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:logout' %}">خروج</a></li>
-        {% else %}
-            <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:signup' %}">ثبت نام</a></li>
-            <li><a class="dropdown-item" href="{% url 'moshavere:login' %}">ورود</a></li>
-        {% endif %}
-        </ul>
-    </li>
+        </div>
+        <div class="col">
+            <li class="nav-item dropdown" style="list-style: none;">
+                <a class="btn btn-primary btn-sm dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    منو
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                {% if user.is_authenticated %}
+                    <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:employee' %}">پروفایل</a></li>
+                {% if user.is_authenticated and user.employee.is_authorized == True %}
+                    <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:consulation' %}">{{ user.employee.job }}</a></li>
+                    <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:students' %}">دانشجویان</a></li>
+                {% endif %}
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" style="margin-left: 6px;" href="{% url 'moshavere:logout' %}">خروج</a></li>
+                {% else %}
+                    <li><a class="dropdown-item" href="{% url 'moshavere:login' %}">ورود</a></li>
+                {% endif %}
+                </ul>
+            </li>
+        </div>
     </div>
 </nav>

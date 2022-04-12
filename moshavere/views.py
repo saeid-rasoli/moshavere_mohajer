@@ -9,7 +9,7 @@ from django.db.models import Q
 from django.http import FileResponse
 from django.shortcuts import redirect, render
 
-from .forms import ConsulationForm, EmployeeForm, UserSignupForm
+from .forms import ConsulationForm, EmployeeForm
 from .models import Consulation, Employee
 from .scripts import students
 
@@ -18,21 +18,21 @@ def index(request):
     return render(request, 'index.html', {})
 
 
-def signup(request):
-    success_message = 'ثبت نام با موفقیت صورت گرفت'
-    if request.method == 'POST':
-        form = UserSignupForm(request.POST or None)
-        if form.is_valid():
-            form.save()
+# def signup(request):
+#     success_message = 'ثبت نام با موفقیت صورت گرفت'
+#     if request.method == 'POST':
+#         form = UserSignupForm(request.POST or None)
+#         if form.is_valid():
+#             form.save()
 
-            messages.add_message(request, messages.SUCCESS, success_message)
-            return redirect('moshavere:login')
-    else:
-        form = UserSignupForm()
-    context = {
-        'form': form
-    }
-    return render(request, 'auth/signup.html', context)
+#             messages.add_message(request, messages.SUCCESS, success_message)
+#             return redirect('moshavere:login')
+#     else:
+#         form = UserSignupForm()
+#     context = {
+#         'form': form
+#     }
+#     return render(request, 'auth/signup.html', context)
 
 
 def login(request):
