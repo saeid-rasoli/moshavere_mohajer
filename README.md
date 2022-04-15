@@ -26,12 +26,13 @@
 - [X] add students page to navbar for consulation employee
 - [X] search for students list
 - [X] markaz for each city in esfahan
+- [X] improve homepage
 - [ ] improve markaz moshave page ui/ux
-- [ ] moshaver update profile with excel file
+- [ ] moshaver update profile with excel file (create model)
 - [ ] nazer can add new moshaver
 - [ ] create humberger menu for each city in esfahan
 - [ ] nazer can add new markaz moshavere
-- [ ] improve homepage
 - [ ] about us page and phone number when reserving
 - [ ] moshavers in each city
+- [ ] about us with moshavers and cities
 

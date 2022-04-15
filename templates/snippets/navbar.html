@@ -3,26 +3,13 @@
     <div class="container">
     <div class="container-flex">
         <a href="{% url 'moshavere:index' %}"><img src="{% static '/imgs/mohajer_favicon.ico' %}" alt="" width="24" height="24"></a>
-        <a class="navbar-brand" style="font-size: 1em;" href="{% url 'moshavere:index' %}">مشاوره مهاجر</a>
+        <a class="navbar-brand" style="font-size: 1em;" href="{% url 'moshavere:index' %}">مرکز مشاوره مهاجر</a>
     </div>
 
     <div class="row">
-        <div class="col m-0 p-0">
-            <li class="nav-item dropdown" style="list-style: none;">
-                <a class="btn btn-success btn-sm dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    مراکز مشاوره
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="{% url 'moshavere:markaz_moshavere' city='اصفهان' %}">اصفهان</a></li>
-                    <li><a class="dropdown-item" href="{% url 'moshavere:markaz_moshavere' city='شاهین شهر' %}">شاهین شهر</a></li>
-                    <li><a class="dropdown-item" href="{% url 'moshavere:markaz_moshavere' city='گلپایگان' %}">گلپایگان</a></li>
-                </ul>
-            </li>
-        </div>
         <div class="col">
             <li class="nav-item dropdown" style="list-style: none;">
-                <a class="btn btn-primary btn-sm dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                <a class="btn btn-outline-light btn-sm dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     منو
                 </a>
@@ -42,6 +29,27 @@
                 {% endif %}
                 </ul>
             </li>
+        </div>
+        <div class="col m-0 p-0">
+            <button class="navbar-toggler py-0 px-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon" ></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">لیست مرکز استان ها</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <div class="offcanvas-body p-0 m-0">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li><a class="dropdown-item" style="font-size: 1.15em;" href="{% url 'moshavere:markaz_moshavere' city='اصفهان' %}">اصفهان</a></li>
+                        <li><a class="dropdown-item" style="font-size: 1.15em;" href="{% url 'moshavere:markaz_moshavere' city='شاهین شهر' %}">شاهین شهر</a></li>
+                        <li><a class="dropdown-item" style="font-size: 1.15em;" href="{% url 'moshavere:markaz_moshavere' city='گلپایگان' %}">گلپایگان</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </nav>

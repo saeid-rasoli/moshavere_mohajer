@@ -7,16 +7,24 @@
 {% include 'snippets/message.html' %}
 <img class="img-fluid mb-3" src="{% static 'imgs/mohajer.jpg' %}" alt="mohajer">
 <div class="container">
-    {% if user.is_authenticated %}
-        <div class="alert alert-primary" role="alert">
-            <p>خوش آمدید {{ user.username }}</p>
-            لطفا برای استفاده از سایت وارد پنل پروفایل خود شوید و اطلاعات لازمه را وارد نمایید.
+    <div class="card mb-3 border-0">
+        <div class="row g-0">
+            <div class="col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title">مشاوره دانشجویان اصفهان</h5>
+                    <br>
+                    <p class="card-text">در این سایت دانشجویان میتوانند با انتخاب مشاور و ارسال درخواست به مشاور مورد نظر مشکلات و سوالات خود را 
+                        بپرسند و مشاور ها فرم مشاوره برایشان ارسال کنند.
+                    </p>
+                    <p class="card-text"><small class="text-muted">شماره تماس: ۲۲۲۳۳۴۴-۰۳۱</small></p>
+                    <br>
+                    <button class="btn btn-primary">درباره ما</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'imgs/moshavere2.png' %}" class="img-fluid rounded-start" alt="...">
+            </div>
         </div>
-    {% else %}
-        <div class="alert alert-primary" role="alert">
-            <p>خوش آمدید، لطفا وارد حساب کاربری خود شوید.</p>
-            <a href="{% url 'moshavere:login' %}">ورود</a>
-        </div>
-    {% endif %}
+    </div>
 </div>
 {% endblock %}
