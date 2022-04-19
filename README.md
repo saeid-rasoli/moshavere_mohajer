@@ -27,12 +27,14 @@
 - [X] search for students list
 - [X] markaz for each city in esfahan
 - [X] improve homepage
-- [ ] improve markaz moshave page ui/ux
-- [ ] moshaver update profile with excel file (create model)
-- [ ] nazer can add new moshaver
-- [ ] create humberger menu for each city in esfahan
-- [ ] nazer can add new markaz moshavere
-- [ ] about us page and phone number when reserving
+- [X] create markaz moshavere all page
+- [X] create humberger menu
 - [ ] moshavers in each city
-- [ ] about us with moshavers and cities
-
+- [ ] moshaver update profile with excel file (create model)
+- [ ] create agent for each markaz moshavere
+- [ ] agent can create new moshaver for markaz
+- [ ] give premission to agents for edit, delete and log for moshavers in markaz moshavere
+- [ ] nazer can add new moshaver (username, password)
+- [ ] about us page and phone number when reserving about us with moshavers and cities
+- [ ] contact us page
+- [ ] reserve for students can access after checking the student number and meli code

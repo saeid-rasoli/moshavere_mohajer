@@ -207,6 +207,16 @@ def students_view(request):
     }
     return render(request, 'students/students.html', context)
 
+@login_required
+def marakez_moshavere_all(request):
+    marakez_moshavere_all = MarakezMoshavere.objects.all()
+    context = {
+        'markaz_moshavere': marakez_moshavere_all
+    }
+
+    return render(request, 'markaz/marakez_moshaver_all.html', context)
+
+@login_required
 def marakez_moshavere(request, city):
     marakez_moshavere = MarakezMoshavere.objects.filter(city__name=city).first()
     context = {
