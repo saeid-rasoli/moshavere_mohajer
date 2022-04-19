@@ -13,7 +13,18 @@ ARZYABI_CHOICES = (
     ('وسواس', 'وسواس'),
     ('مضطرب', 'مضطرب')
 )
-
+TYPE_HAMKARI = (
+    ('مدعو', 'مدعو'),
+    ('رسمی', 'رسمی'),
+    ('پروژه ای', 'پروژه ای'),
+    ('قراردادی', 'قراردادی'),
+)
+S_P_B = (
+    ('سازمان نظام روانشناسی', 'سازمان نظام روانشناسی'),
+    ('پروانه اشتغال تخصصی', 'پروانه اشتغال تخصصی'),
+    ('بهزیستی', 'بهزیستی'),
+    ('ندارد', 'ندارد'),
+)
 
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -23,6 +34,7 @@ class Employee(models.Model):
 
     def __str__(self):
         return f'{self.user.username}-{self.job}'
+
 
 
 class Consulation(models.Model):
@@ -59,13 +71,47 @@ class City(models.Model):
     def __str__(self):
         return self.name
 
+class Daneshkadeh(models.Model):
+    name = models.CharField(max_length=200, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+class ProfileEmployee(models.Model):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    employee = models.OneToOneField(Employee, on_delete=models.CASCADE)
+    city = models.OneToOneField(City, on_delete=models.CASCADE)
+    daneshkadeh = models.OneToOneField(Daneshkadeh, on_delete=models.CASCADE)
+    saghfe_mojaz_hafte = models.IntegerField(default=0)
+    hours_weekly_authorized = models.IntegerField(default=0)
+    type_hamkari_ba_daneshgah = models.CharField(max_length=100, choices=TYPE_HAMKARI, default='پروژه ای')
+    akharin_maghta_tahsili = models.CharField(max_length=100)
+    akharin_reshte_tahsili = models.CharField(max_length=150)
+    sazman_parvane_behzisti = models.CharField(max_length=150, default='ندارد', choices=S_P_B)
+    tarikh_shoro_faliyat = models.DateTimeField(auto_now_add=True)
+    roozhaye_hozor = models.CharField(max_length=250, blank=True, null=True)
+    pedar_name = models.CharField(max_length=250, blank=True, null=True)
+    birthday = models.DateField()
+    shaba_number = models.CharField(max_length=250, blank=True, null=True)
+    hesab_number = models.IntegerField(default=0)
+    molahezat = models.TextField(max_length=9000, blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
+
 class MarakezMoshavere(models.Model):
     city = models.OneToOneField(City, on_delete=models.CASCADE, blank=True, null=True)
     daneshgah_name = models.CharField(max_length=400, blank=True, null=True)
     daneshgah_code = models.CharField(max_length=50, blank=True, null=True)
-    karbari_markaz_behdasht = models.CharField(max_length=80, blank=True, null=True)
     karbari_markaz_moshavere = models.CharField(max_length=80, blank=True, null=True)
 
     def __str__(self):
         return self.daneshgah_name
 
+class AgentMarkaz(models.Model):
+    markaz_moshavere = models.OneToOneField(MarakezMoshavere, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    meli_code = models.IntegerField(unique=True, blank=True)
+    is_authorized = models.BooleanField(default=False)

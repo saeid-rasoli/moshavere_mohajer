@@ -29,9 +29,11 @@
 - [X] improve homepage
 - [X] create markaz moshavere all page
 - [X] create humberger menu
+- [X] all moshavers for nazer
+- [X] create agent for each markaz moshavere (create model)
+- [X] moshaver update profile with excel file (create model)
+- [X] moshaver update profile page with jalali calander
 - [ ] moshavers in each city
-- [ ] moshaver update profile with excel file (create model)
-- [ ] create agent for each markaz moshavere
 - [ ] agent can create new moshaver for markaz
 - [ ] give premission to agents for edit, delete and log for moshavers in markaz moshavere
 - [ ] nazer can add new moshaver (username, password)

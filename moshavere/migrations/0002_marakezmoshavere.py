@@ -16,7 +16,6 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('markaz_name', models.CharField(blank=True, max_length=400, null=True)),
                 ('daneshgah_code', models.CharField(blank=True, max_length=50, null=True)),
-                ('karbari_markaz_behdasht', models.CharField(blank=True, max_length=80, null=True)),
                 ('karbari_markaz_moshavere', models.CharField(blank=True, max_length=80, null=True)),
             ],
         ),
