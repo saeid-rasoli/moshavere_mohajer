@@ -1,31 +1,26 @@
 {% extends 'base.html' %}
 
+
 {% block title %}{{ user.username }} پروفایل{% endblock %}
 
 {% block content %}
+{% if user.profileemployee.meli_code %}
+<h2>اطلاعات شخصی:</h2>
+<br>
+<h1>اینجارو تکمیل کن</h1>
+{{ profile.meli_code }}
+{% else %}
 <div class="container my-5">
     <div class="row">
         <div class="col-sm-6">
-            {% if user.employee.meli_code %}
-            <p>نام کاربری: {{ user.username }}</p>
-            <p>نام: {{ user.first_name }}</p>
-            <p>نام خانوادگی: {{ user.last_name }}</p>
-            <p>کد ملی: {{ user.employee.meli_code }}</p>
-            <p>شغل: {{ user.employee.job }}</p>
-            <p>تایید شده:
-                {% if user.employee.is_authorized == False %}
-                خیر
-                {% else %}
-                بله
-                {% endif %}
-            </p>
-            {% else %}
             <form action="" method="POST">{% csrf_token %}
                 {{ form.as_p }}
+                {{ form.media }}
+
                 <button class="btn btn-success" type="submit">ثبت</button>
             </form>
-            {% endif %}
         </div>
     </div>
 </div>
+{% endif %}
 {% endblock %}

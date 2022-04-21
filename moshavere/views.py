@@ -9,30 +9,13 @@ from django.db.models import Q
 from django.http import FileResponse
 from django.shortcuts import redirect, render
 
-from .forms import ConsulationForm, EmployeeForm
-from .models import Consulation, Employee, MarakezMoshavere
+from .forms import ConsulationForm, EmployeeProfileForm
+from .models import Consulation, MarakezMoshavere, ProfileEmployee
 from .scripts import students
 
 
 def index(request):
     return render(request, 'index.html', {})
-
-
-# def signup(request):
-#     success_message = 'ثبت نام با موفقیت صورت گرفت'
-#     if request.method == 'POST':
-#         form = UserSignupForm(request.POST or None)
-#         if form.is_valid():
-#             form.save()
-
-#             messages.add_message(request, messages.SUCCESS, success_message)
-#             return redirect('moshavere:login')
-#     else:
-#         form = UserSignupForm()
-#     context = {
-#         'form': form
-#     }
-#     return render(request, 'auth/signup.html', context)
 
 
 def login(request):
@@ -42,9 +25,10 @@ def login(request):
 @login_required
 def employee(request):
     success_message = 'اطاعات شما ثبت شد'
-    form = EmployeeForm()
+    form = EmployeeProfileForm()
+    profile = ProfileEmployee.objects.filter(user=request.user).first()
     if request.method == 'POST':
-        form = EmployeeForm(request.POST or None)
+        form = EmployeeProfileForm(request.POST or None)
         if form.is_valid():
             user = request.user
             instance = form.save(commit=False)
@@ -53,9 +37,10 @@ def employee(request):
             messages.add_message(request, messages.SUCCESS, success_message)
             return redirect('moshavere:index')
     else:
-        form = EmployeeForm()
+        form = EmployeeProfileForm()
     context = {
-        'form': form
+        'form': form,
+        'profile': profile
     }
     return render(request, 'profile/employee.html', context)
 
@@ -63,7 +48,7 @@ def employee(request):
 @login_required
 def consulation(request):
     success_message = 'فرم شما با موفقیت ثبت شد'
-    employee_model = Employee.objects.filter(user=request.user).first()
+    employee_model = ProfileEmployee.objects.filter(user=request.user).first()
     search_post = request.GET.get('search')
     if search_post:
         if len(search_post.split()) == 2:
@@ -224,3 +209,4 @@ def marakez_moshavere(request, city):
     }
 
     return render(request, 'markaz/markaz_moshavere.html', context)
+

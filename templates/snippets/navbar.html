@@ -31,11 +31,11 @@
                         <li><a class="dropdown-item" href="#">تماس با ما</a></li>
                         {% if user.is_authenticated %}
                         <li><a class="dropdown-item" href="{% url 'moshavere:employee' %}">پروفایل</a></li>
-                        {% if user.is_authenticated and user.employee.is_authorized == True %}
-                        <li><a class="dropdown-item" href="{% url 'moshavere:consulation' %}">{{ user.employee.job }}</a></li>
+                        {% if user.is_authenticated and user.profileemployee.is_authorized == True %}
+                        <li><a class="dropdown-item" href="{% url 'moshavere:consulation' %}">{{ user.profileemployee.job }}</a></li>
                         <li><a class="dropdown-item" href="{% url 'moshavere:students' %}">دانشجویان</a></li>
                         {% endif %}
-                        {% if user.is_authenticated and user.employee.is_authorized == True and user.employee.job == 'ناظر'%}
+                        {% if user.is_authenticated and user.profileemployee.is_authorized == True and user.profileemployee.job == 'ناظر'%}
                         <li><a class="dropdown-item" href="{% url 'moshavere:markaz_moshavere_all' %}">مراکز مشاوره</a></li>
                         {% endif %}
                         <li>

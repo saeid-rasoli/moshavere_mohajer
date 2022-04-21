@@ -3,80 +3,84 @@ from django.contrib.auth.forms import (AuthenticationForm, UsernameField)
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
-from .models import Employee, Consulation
+from .models import ProfileEmployee, Consulation
 from jalali_date.fields import JalaliDateField
 from jalali_date.widgets import AdminJalaliDateWidget
 
 
-# class UserSignupForm(UserCreationForm):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields['username'].label = 'نام کاربری'
-#         self.fields['username'].widget.attrs.update({
-#             'class': 'form-control',
-#             'placeholder': 'نام کاربری با زبان انگلیسی',
-#         })
-#         self.fields['first_name'].label = 'نام'
-#         self.fields['first_name'].widget.attrs.update({
-#             'class': 'form-control',
-#             'placeholder': 'نام با زبان فارسی',
-#         })
-#         self.fields['last_name'].label = 'نام خانوادگی'
-#         self.fields['last_name'].widget.attrs.update({
-#             'class': 'form-control',
-#             'placeholder': 'نام خانوادگی با زبان فارسی',
-#         })
-#         self.fields['password1'].label = 'رمز عبور'
-#         self.fields['password1'].widget.attrs.update({
-#             'class': 'form-control'
-#         })
-#         self.fields['password2'].label = 'تکرار رمز عبور'
-#         self.fields['password2'].widget.attrs.update({
-#             'class': 'form-control'
-#         })
-
-#     def clean_password2(self):
-#         password1 = self.cleaned_data['password1']
-#         password2 = self.cleaned_data['password2']
-
-#         if password1 != password2:
-#             raise forms.ValidationError('رمز ها با هم همخوانی ندارند')
-#         elif len(password2) < 8:
-#             raise forms.ValidationError('حداقل رمز باید شامل ۸ کاراکتر باشد')
-
-#     def clean_username(self):
-#         username = self.cleaned_data['username']
-
-#         if User.objects.filter(username=username).exists():
-#             raise forms.ValidationError('کاربری با این نام وجود دارد')
-#         return username
-
-#     class Meta:
-#         model = User
-#         fields = ['username', 'first_name',
-#                   'last_name', 'password1', 'password2']
-
-
-class EmployeeForm(ModelForm):
+class EmployeeProfileForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['first_name'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['last_name'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['city'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['daneshkadeh'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['saghfe_mojaz_hafte'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['hours_weekly_authorized'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['akharin_maghta_tahsili'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['akharin_reshte_tahsili'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['sazman_parvane_behzisti'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['roozhaye_hozor'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['pedar_name'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['shaba_number'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['hesab_number'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['molahezat'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['molahezat'].widget.attrs.update({
+            'class': 'form-control'
+        })
         self.fields['meli_code'].widget.attrs.update({
             'class': 'form-control'
         })
         self.fields['job'].widget.attrs.update({
             'class': 'form-control'
         })
+        self.fields['type_hamkari_ba_daneshgah'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['birthday'] = JalaliDateField(label=('تاریخ تولد'),
+                                               widget=AdminJalaliDateWidget,
+                                               )
+        self.fields['birthday'].widget.attrs.update({'class': 'form-control jalali_date-date',
+                                                  'placeholder': 'برای انتخاب تاریخ کلیک کنید'})
 
     class Meta:
-        model = Employee
-        fields = ['meli_code', 'job']
+        model = ProfileEmployee
+        exclude = ['employee', 'tarikh_shoro_faliyat', 'is_authorized', 'user']
 
     def clean(self):
         meli_code = str(self.cleaned_data['meli_code'])
 
         if len(meli_code) != 10:
             raise forms.ValidationError('کُد ملی نا معتبر')
-        elif Employee.objects.filter(meli_code=meli_code).exists():
+        elif ProfileEmployee.objects.filter(meli_code=meli_code).exists():
             raise forms.ValidationError(
                 'کاربری با این کُد ملی قبلا ثبت نام کرده است')
 
