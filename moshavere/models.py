@@ -36,6 +36,7 @@ class City(models.Model):
 
 class Daneshkadeh(models.Model):
     name = models.CharField(max_length=200, blank=True, null=True)
+    daneshgah_code = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -45,11 +46,11 @@ class ProfileEmployee(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    meli_code = models.IntegerField(unique=True, blank=True, null=True)
+    meli_code = models.IntegerField(unique=True)
     is_authorized = models.BooleanField(default=False)
     job = models.CharField(max_length=8, choices=JOB_CHOICES, default='مشاور', null=True)
-    city = models.OneToOneField(City, on_delete=models.CASCADE)
-    daneshkadeh = models.OneToOneField(Daneshkadeh, on_delete=models.CASCADE)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    daneshkadeh = models.ForeignKey(Daneshkadeh, on_delete=models.CASCADE)
     saghfe_mojaz_hafte = models.IntegerField(default=0)
     hours_weekly_authorized = models.IntegerField(default=0)
     type_hamkari_ba_daneshgah = models.CharField(
@@ -103,15 +104,13 @@ class Consulation(models.Model):
 
 
 class MarakezMoshavere(models.Model):
-    city = models.OneToOneField(
-        City, on_delete=models.CASCADE, blank=True, null=True)
-    daneshgah_name = models.CharField(max_length=400, blank=True, null=True)
-    daneshgah_code = models.CharField(max_length=50, blank=True, null=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, null=True)
+    daneshgah_name = models.ForeignKey(Daneshkadeh, on_delete=models.CASCADE)
     karbari_markaz_moshavere = models.CharField(
         max_length=80, blank=True, null=True)
 
     def __str__(self):
-        return self.daneshgah_name
+        return self.daneshgah_name.name
 
 
 class AgentMarkaz(models.Model):

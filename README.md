@@ -31,13 +31,13 @@
 - [X] create humberger menu
 - [X] all moshavers for nazer
 - [X] create agent for each markaz moshavere (create model)
-- [X] moshaver update profile with excel file (create model)
+- [X] moshaver update profile according to excel file (create model)
 - [X] moshaver update profile page with jalali calander
 - [ ] moshavers in each city
+- [ ] nazer can add new agent (username, password)
 - [ ] agent can create new moshaver for markaz
+- [ ] agent can authorize new moshavers
 - [ ] give premission to agents for edit, delete and log for moshavers in markaz moshavere
-- [ ] nazer can add new moshaver (username, password)
 - [ ] about us page and phone number when reserving about us with moshavers and cities
 - [ ] contact us page
 - [ ] reserve for students can access after checking the student number and meli code
-- [ ] fix more years in jalali django date picker

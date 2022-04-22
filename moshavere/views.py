@@ -84,6 +84,7 @@ def consulation(request):
     }
     return render(request, 'forms/consulation.html', context)
 
+
 @login_required
 def consulation_detail(request, slug):
     consulation_detail_model = Consulation.objects.filter(slug=slug).first()
@@ -92,14 +93,17 @@ def consulation_detail(request, slug):
     }
     return render(request, 'forms/consulation_detail.html', context)
 
+
 @login_required
 def export_form(request, slug):
     consulation_detail_model = Consulation.objects.filter(slug=slug).first()
     buffer = io.BytesIO()
     workbook = xlsxwriter.Workbook(buffer)
     worksheet = workbook.add_worksheet()
-    headers = ['مشاور', 'ترم های مشروطی', 'معدل', 'ارزیابی', 'ارجاع به مشاوره تحصیلی', 'ارجاع به مشاوره شغلی', 'ارجاع به مشاوره بالینی', 'نوبت', 'حضور', 'معدل ترم بعد', 'مشکل اصلی', 'نشانه های رفتاری', 'اهداف مداخله', 'فرایند مداخله']
-    cols =  ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N']
+    headers = ['مشاور', 'ترم های مشروطی', 'معدل', 'ارزیابی', 'ارجاع به مشاوره تحصیلی', 'ارجاع به مشاوره شغلی',
+               'ارجاع به مشاوره بالینی', 'نوبت', 'حضور', 'معدل ترم بعد', 'مشکل اصلی', 'نشانه های رفتاری', 'اهداف مداخله', 'فرایند مداخله']
+    cols = ['A', 'B', 'C', 'D', 'E', 'F', 'G',
+            'H', 'I', 'J', 'K', 'L', 'M', 'N']
     cde = ''
     cds = ''
     cdt = ''
@@ -121,12 +125,15 @@ def export_form(request, slug):
     else:
         hozor = 'خیر'
 
-    header_format = workbook.add_format({'bg_color': 'yellow', 'align': 'center', 'font_size': 13})
-    value_format = workbook.add_format({'bg_color': '#8fe7ff', 'align': 'center', 'font_size': 13})
+    header_format = workbook.add_format(
+        {'bg_color': 'yellow', 'align': 'center', 'font_size': 13})
+    value_format = workbook.add_format(
+        {'bg_color': '#8fe7ff', 'align': 'center', 'font_size': 13})
     for i in range(len(headers)):
         worksheet.write(f'{cols[i]}1', f'{headers[i]}', header_format)
 
-    worksheet.write('A2', consulation_detail_model.author.user.username, value_format)
+    worksheet.write(
+        'A2', consulation_detail_model.author.user.username, value_format)
     worksheet.write('B2', consulation_detail_model.mashroot_len, value_format)
     worksheet.write('C2', consulation_detail_model.moadel, value_format)
     worksheet.write('D2', consulation_detail_model.arzyabi, value_format)
@@ -135,11 +142,15 @@ def export_form(request, slug):
     worksheet.write('G2', cdb, value_format)
     worksheet.write('H2', consulation_detail_model.nobat, value_format)
     worksheet.write('I2', hozor, value_format)
-    worksheet.write('J2', consulation_detail_model.model_term_ghabl, value_format)
+    worksheet.write(
+        'J2', consulation_detail_model.model_term_ghabl, value_format)
     worksheet.write('K2', consulation_detail_model.moshkel_asli, value_format)
-    worksheet.write('L2', consulation_detail_model.neshanehaye_raftari, value_format)
-    worksheet.write('M2', consulation_detail_model.ahdaf_modakhele, value_format)
-    worksheet.write('N2', consulation_detail_model.farayande_modakhele, value_format)
+    worksheet.write(
+        'L2', consulation_detail_model.neshanehaye_raftari, value_format)
+    worksheet.write(
+        'M2', consulation_detail_model.ahdaf_modakhele, value_format)
+    worksheet.write(
+        'N2', consulation_detail_model.farayande_modakhele, value_format)
 
     # increase width column
     worksheet.set_column('A:J', 30)
@@ -149,11 +160,14 @@ def export_form(request, slug):
 
     return FileResponse(buffer, as_attachment=True, filename=f'{consulation_detail_model.author.user.username}-form.xlsx')
 
+
 def bad_request(request, exception=None):
     return render(request, 'error/404.html', {}, status=404)
 
+
 def server_error(request, exception=None):
     return render(request, 'error/500.html', {}, status=500)
+
 
 @login_required
 def students_view(request):
@@ -192,6 +206,7 @@ def students_view(request):
     }
     return render(request, 'students/students.html', context)
 
+
 @login_required
 def marakez_moshavere_all(request):
     marakez_moshavere_all = MarakezMoshavere.objects.all()
@@ -201,12 +216,13 @@ def marakez_moshavere_all(request):
 
     return render(request, 'markaz/marakez_moshaver_all.html', context)
 
+
 @login_required
 def marakez_moshavere(request, city):
-    marakez_moshavere = MarakezMoshavere.objects.filter(city__name=city).first()
+    marakez_moshavere = MarakezMoshavere.objects.filter(
+        city__name=city).first()
     context = {
         'markaz_moshavere': marakez_moshavere
     }
 
     return render(request, 'markaz/markaz_moshavere.html', context)
-

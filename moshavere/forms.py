@@ -12,64 +12,83 @@ class EmployeeProfileForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['first_name'].widget.attrs.update({
-            'class': 'form-control'
+            'class': 'form-control',
         })
+        self.fields['first_name'].label = 'نام'
         self.fields['last_name'].widget.attrs.update({
             'class': 'form-control'
         })
+        self.fields['last_name'].label = 'نام خانوادگی'
         self.fields['city'].widget.attrs.update({
             'class': 'form-control'
         })
+        self.fields['city'].label = 'شهر مرکز مشاوره'
         self.fields['daneshkadeh'].widget.attrs.update({
             'class': 'form-control'
         })
+        self.fields['daneshkadeh'].label = 'دانشکده'
         self.fields['saghfe_mojaz_hafte'].widget.attrs.update({
             'class': 'form-control'
         })
+        self.fields['saghfe_mojaz_hafte'].label = 'سقف ساعت مجاز دانشکده / آموزشکده در هفته'
         self.fields['hours_weekly_authorized'].widget.attrs.update({
             'class': 'form-control'
         })
+        self.fields['hours_weekly_authorized'].label = 'ساعت تایید شده در هفته'
         self.fields['akharin_maghta_tahsili'].widget.attrs.update({
             'class': 'form-control'
         })
+        self.fields['akharin_maghta_tahsili'].label = 'آخرین مقطع تحصیلی'
         self.fields['akharin_reshte_tahsili'].widget.attrs.update({
             'class': 'form-control'
         })
+        self.fields['akharin_reshte_tahsili'].label = 'آخرین رشته تحصیلی'
         self.fields['sazman_parvane_behzisti'].widget.attrs.update({
             'class': 'form-control'
         })
+        self.fields['sazman_parvane_behzisti'].label = 'پروانه اشتغال تخصصی / سازمان نظام روانشناسی / بهزیستی'
         self.fields['roozhaye_hozor'].widget.attrs.update({
-            'class': 'form-control'
+            'class': 'form-control',
+            'placeholder': 'شنبه،دوشنبه'
         })
+        self.fields['roozhaye_hozor'].label = 'روز های حضور'
         self.fields['pedar_name'].widget.attrs.update({
             'class': 'form-control'
         })
+        self.fields['pedar_name'].label = 'نام پدر'
         self.fields['shaba_number'].widget.attrs.update({
-            'class': 'form-control'
+            'class': 'form-control',
+            'placeholder': 'IR999999999999999999999999'
         })
+        self.fields['shaba_number'].label = 'شماره شبا'
         self.fields['hesab_number'].widget.attrs.update({
             'class': 'form-control'
         })
+        self.fields['hesab_number'].label = 'شماره حساب'
         self.fields['molahezat'].widget.attrs.update({
             'class': 'form-control'
         })
+        self.fields['molahezat'].label = 'ملاحضات'
         self.fields['molahezat'].widget.attrs.update({
             'class': 'form-control'
         })
         self.fields['meli_code'].widget.attrs.update({
             'class': 'form-control'
         })
+        self.fields['meli_code'].label = 'کٌد ملی'
         self.fields['job'].widget.attrs.update({
             'class': 'form-control'
         })
+        self.fields['job'].label = 'مشاور / ناظر'
         self.fields['type_hamkari_ba_daneshgah'].widget.attrs.update({
             'class': 'form-control'
         })
+        self.fields['type_hamkari_ba_daneshgah'].label = 'نوع همکاری با دانشگاه'
         self.fields['birthday'] = JalaliDateField(label=('تاریخ تولد'),
-                                               widget=AdminJalaliDateWidget,
-                                               )
+                                                  widget=AdminJalaliDateWidget,
+                                                  )
         self.fields['birthday'].widget.attrs.update({'class': 'form-control jalali_date-date',
-                                                  'placeholder': 'برای انتخاب تاریخ کلیک کنید'})
+                                                     'placeholder': '1375-12-07'})
 
     class Meta:
         model = ProfileEmployee

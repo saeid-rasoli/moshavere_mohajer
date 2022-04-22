@@ -20,7 +20,7 @@
                     {% for markaz in markaz_moshavere %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ markaz.daneshgah_code }}</td>
+                            <td>{{ markaz.daneshgah_name.daneshgah_code }}</td>
                             <td>{{ markaz.daneshgah_name }}</td>
                             <td>{{ markaz.karbari_markaz_moshavere }}</td>
                         </tr>

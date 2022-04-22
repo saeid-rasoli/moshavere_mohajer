@@ -32,9 +32,9 @@
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ record.author.user.first_name }} {{ record.author.user.last_name }}</td>
-                            <td>{{ record.nobat|to_jalali:'%y/%m/%d'}}</td>
+                            <td>{{ record.nobat|to_jalali:'%Y/%m/%d'}}</td>
                             <td>{{ record.moadel }}</td>
-                            <td>{{ record.created_date|to_jalali:'%y/%m/%d - %H:%M:%S'}}</td>
+                            <td>{{ record.created_date|to_jalali:'%Y/%m/%d - %H:%M:%S'}}</td>
                             <td><a href="{% url 'moshavere:consulation_detail' slug=record.slug %}" class="btn btn-success btn-sm">ادامه فرم</a></td>
                         </tr>
                     {% endfor %}
