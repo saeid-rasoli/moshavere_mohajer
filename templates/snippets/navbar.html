@@ -1,4 +1,6 @@
 {% load static %}
+{% load moshavere_extra %}
+
 <nav class="navbar navbar-dark bg-dark p-1">
     <div class="container">
     <div class="container-flex">
@@ -30,14 +32,16 @@
                         <li><a class="dropdown-item" href="#">درباره ما</a></li>
                         <li><a class="dropdown-item" href="#">تماس با ما</a></li>
                         {% if user.is_authenticated %}
-                        <li><a class="dropdown-item" href="{% url 'moshavere:employee' %}">پروفایل</a></li>
-                        {% if user.is_authenticated and user.profileemployee.is_authorized == True %}
-                        <li><a class="dropdown-item" href="{% url 'moshavere:consulation' %}">{{ user.profileemployee.job }}</a></li>
                         <li><a class="dropdown-item" href="{% url 'moshavere:students' %}">دانشجویان</a></li>
-                        {% endif %}
-                        {% if user.is_authenticated and user.profileemployee.is_authorized == True and user.profileemployee.job == 'ناظر'%}
                         <li><a class="dropdown-item" href="{% url 'moshavere:markaz_moshavere_all' %}">مراکز مشاوره</a></li>
-                        {% endif %}
+                            {% with user.username|split_ret_last:"-" as job %}
+                            {% if job == 'nazer' %}
+                            <li><a class="dropdown-item" href="{% url 'moshavere:nazer' %}">نظارت</a></li>
+                            {% elif job == 'moshaver' %}
+                            <li><a class="dropdown-item" href="{% url 'moshavere:employee' %}">پروفایل</a></li>
+                            <li><a class="dropdown-item" href="{% url 'moshavere:consulation' %}">مشاوره</a></li>
+                            {% endif %}
+                            {% endwith %}
                         <li>
                             <hr class="dropdown-divider">
                         </li>

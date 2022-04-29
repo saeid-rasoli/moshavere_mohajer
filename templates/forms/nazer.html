@@ -1,5 +1,9 @@
+{% extends 'base.html' %}
 {% load jalali_tags %}
 
+{% block title%}ناظر{% endblock %}
+
+{% block content%}
 <div class="container my-5">
     <p>فرم های ثبت شده توسط مشاور ها</p>
     <div class="row">
@@ -31,7 +35,7 @@
                     {% for record in consulation %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ record.author.user.first_name }} {{ record.author.user.last_name }}</td>
+                            <td>{{ record.author.first_name }} {{ record.author.last_name }}</td>
                             <td>{{ record.nobat|to_jalali:'%Y/%m/%d'}}</td>
                             <td>{{ record.moadel }}</td>
                             <td>{{ record.created_date|to_jalali:'%Y/%m/%d - %H:%M:%S'}}</td>
@@ -44,3 +48,4 @@
         </div>
     </div>
 </div>
+{% endblock %}

@@ -15,6 +15,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='auth/logout.html'), name='logout'),
     path('employee/', views.employee, name='employee'),
     path('consulation/', views.consulation, name='consulation'),
+    path('nazer/', views.nazer, name='nazer'),
     path('consulation/<slug:slug>/', views.consulation_detail, name='consulation_detail'),
     path('consulation/<slug:slug>/export/', views.export_form, name='export_form'),
     path('students/', views.students_view, name='students'),

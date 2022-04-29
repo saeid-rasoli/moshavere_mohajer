@@ -5,7 +5,7 @@
 {% block title %}{{ user.username }} پروفایل{% endblock %}
 
 {% block content %}
-{% if user.profileemployee.meli_code %}
+{% if user.moshaverprofile.meli_code %}
 <div class="container my-5">
     <h5>اطلاعات کاربری شما:</h5>
     <br>
@@ -25,11 +25,6 @@
             </div>
             <div class="col-sm-6">
                 <p>نام خانوادگی: {{ profile.last_name }}</p>
-                {% if profile.is_authorized %}
-                <p>تایید شده: بله</p>
-                {% else %}
-                <p>تایید شده: خیر</p>
-                {% endif %}
                 <p>شهر: {{ profile.city }}</p>
                 <p>سقف ساعت مجاز دانشکده/آموزشکده در هفته: {{ profile.saghfe_mojaz_hafte }}</p>
                 <p>نوع همکاری با دانشگاه: {{ profile.type_hamkari_ba_daneshgah }}</p>
