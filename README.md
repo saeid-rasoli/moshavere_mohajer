@@ -33,9 +33,9 @@
 - [X] create agent for each markaz moshavere (create model)
 - [X] moshaver update profile according to excel file (create model)
 - [X] moshaver update profile page with jalali calander
+- [ ] reserve for students can access after checking the student number and meli code
 - [ ] moshavers in each city
 - [ ] nazer can create new moshaver for markaz
 - [ ] give premission to nazers for edit, delete and log for moshavers in markaz moshavere
 - [ ] about us page and phone number when reserving about us with moshavers and cities
 - [ ] contact us page
-- [ ] reserve for students can access after checking the student number and meli code

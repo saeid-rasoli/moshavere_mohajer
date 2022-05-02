@@ -106,3 +106,12 @@ class Nazer(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     meli_code = models.IntegerField(unique=True, blank=True)
+
+
+class Reservation(models.Model):
+    daneshjoo = models.OneToOneField(User, on_delete=models.CASCADE)
+    meli_code = models.IntegerField(unique=True, blank=True)
+    student_number = models.IntegerField(unique=True, blank=True)
+    city = models.OneToOneField(City, on_delete=models.CASCADE)
+    daneshkadeh = models.OneToOneField(Daneshkadeh, on_delete=models.CASCADE)
+    
