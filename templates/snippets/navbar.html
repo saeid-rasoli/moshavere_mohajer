@@ -32,6 +32,7 @@
                         <li><a class="dropdown-item" href="#">درباره ما</a></li>
                         <li><a class="dropdown-item" href="#">تماس با ما</a></li>
                         {% if user.is_authenticated %}
+                        {% if not user.email %}
                         <li><a class="dropdown-item" href="{% url 'moshavere:students' %}">دانشجویان</a></li>
                         <li><a class="dropdown-item" href="{% url 'moshavere:markaz_moshavere_all' %}">مراکز مشاوره</a></li>
                             {% with user.username|split_ret_last:"-" as job %}
@@ -42,6 +43,7 @@
                             <li><a class="dropdown-item" href="{% url 'moshavere:consulation' %}">مشاوره</a></li>
                             {% endif %}
                             {% endwith %}
+                        {% endif %}
                         <li>
                             <hr class="dropdown-divider">
                         </li>

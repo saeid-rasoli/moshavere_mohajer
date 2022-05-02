@@ -9,7 +9,7 @@ from django.db.models import Q
 from django.http import FileResponse
 from django.shortcuts import redirect, render
 
-from .forms import ConsulationForm, EmployeeProfileForm
+from .forms import ConsulationForm, EmployeeProfileForm, DaneshjooSignupForm
 from .models import Consulation, MarakezMoshavere, MoshaverProfile
 from .scripts import students
 
@@ -40,6 +40,7 @@ def employee(request):
         form = EmployeeProfileForm()
     context = {"form": form, "profile": profile}
     return render(request, "profile/employee.html", context)
+
 
 @login_required
 def nazer(request):
@@ -239,3 +240,18 @@ def marakez_moshavere(request, city):
     context = {"markaz_moshavere": marakez_moshavere}
 
     return render(request, "markaz/markaz_moshavere.html", context)
+
+
+def daneshjoo_signup(request):
+    success_message = "ثبت نام با موفقیت صورت گرفت"
+    if request.method == "POST":
+        form = DaneshjooSignupForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+
+            messages.add_message(request, messages.SUCCESS, success_message)
+            return redirect("moshavere:login")
+    else:
+        form = DaneshjooSignupForm()
+    context = {"form": form}
+    return render(request, "auth/signup.html", context)

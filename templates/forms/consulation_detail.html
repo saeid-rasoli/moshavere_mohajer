@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 {% load jalali_tags %}
+{% load moshavere_extra %}
 
 {% block title %}{{ consulation_detail }} فرم مشاوره{% endblock %}
 {% block content %}
+{% with user.username|split_ret_last:"-" as job %}
+{% if not user.email and job == 'nazer' %}
 <div class="container my-5">
     <a class="btn btn-sm btn-secondary mb-4" href="{% url 'moshavere:nazer' %}">بازگشت به فهرست فرم ها ></a>
     
@@ -75,4 +78,10 @@
     <br>
     <a class="btn btn-success" href="{% url 'moshavere:export_form' slug=consulation_detail.slug %}">خروجی اکسل</a>
 </div>
+{% else %}
+<div class="alert alert-danger text-center">
+    شما دسترسی به این قسمت ندارید.
+</div>
+{% endif %}
+{% endwith %}
 {% endblock %}

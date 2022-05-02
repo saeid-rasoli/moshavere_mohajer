@@ -3,6 +3,7 @@
 {% block title %}دانشجوها{% endblock %}
 
 {% block content %}
+{% if not user.email %}
 <div class="container my-5">
     <p>لیست دانشجوها</p>
     <div class="row">
@@ -83,4 +84,9 @@
         </span>
     </div>
 </div>
+{% else %}
+<div class="alert alert-danger text-center">
+    شما دسترسی به این قسمت ندارید.
+</div>
+{% endif %}
 {% endblock %}

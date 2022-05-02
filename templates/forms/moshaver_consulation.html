@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
+{% load moshavere_extra %}
 
 {% block title%}مشاوره{% endblock %}
 
 {% block content%}
 <!-- مشاور -->
+{% with user.username|split_ret_last:"-" as job %}
+{% if not user.email and job == 'moshaver' %}
 <div class="container my-5">
 {% if user.moshaverprofile %}
     <div class="row">
@@ -22,4 +25,11 @@
     </div>
 {% endif %}
 </div>
+{% else %}
+<div class="alert alert-danger text-center">
+    شما دسترسی به این قسمت ندارید.
+</div>
+{% endif %}
+{% endwith %}
+
 {% endblock %}

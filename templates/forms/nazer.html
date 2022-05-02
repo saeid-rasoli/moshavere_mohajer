@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% load jalali_tags %}
+{% load moshavere_extra %}
 
 {% block title%}ناظر{% endblock %}
 
 {% block content%}
+{% with user.username|split_ret_last:"-" as job %}
+{% if not user.email and job == 'nazer' %}
 <div class="container my-5">
     <p>فرم های ثبت شده توسط مشاور ها</p>
     <div class="row">
@@ -48,4 +51,10 @@
         </div>
     </div>
 </div>
+{% else %}
+<div class="alert alert-danger text-center">
+    شما دسترسی به این قسمت ندارید.
+</div>
+{% endif %}
+{% endwith %}
 {% endblock %}

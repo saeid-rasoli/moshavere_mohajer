@@ -3,6 +3,7 @@
 {% block title %}مراکز مشاوره{% endblock %}
 
 {% block content %}
+{% if not user.email %}
 <div class="container my-5">
     <div class="row">
         <div class="col-sm-12">
@@ -31,4 +32,9 @@
         </div>
     </div>
 </div>
+{% else %}
+<div class="alert alert-danger text-center">
+    شما دسترسی به این قسمت ندارید.
+</div>
+{% endif %}
 {% endblock %}
