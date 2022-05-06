@@ -5,6 +5,11 @@
 
 {% block content %}
 {% if user.email %}
+{% if user.reservation_set.all.first %}
+<div class="alert alert-warning text-center">
+    شما قبلا درخواست رزور برای مشاور داده اید.
+</div>
+{% endif %}
 <div class="container my-5">
     <p>
         لطفا دانشکده خود را انتخاب کنید.

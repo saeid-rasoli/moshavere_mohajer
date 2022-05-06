@@ -15,12 +15,7 @@ from .forms import (
     DaneshjooSignupForm,
     ReservationForm,
 )
-from .models import (
-    Consulation,
-    MarakezMoshavere,
-    MoshaverProfile,
-    Daneshkadeh,
-)
+from .models import Consulation, MarakezMoshavere, MoshaverProfile, Daneshkadeh, City
 from .scripts import students
 
 
@@ -276,17 +271,25 @@ def reservation_view(request):
 
 @login_required
 def reservation_daneshkadeh_view(request, daneshkadeh):
-    success_message = "ثبت نام با موفقیت صورت گرفت"
+    success_message = "درخواست مشاوره شما با موفقیت ثبت شد."
     moshaver = MoshaverProfile.objects.filter(daneshkadeh__name=daneshkadeh)
-    if request.method == 'POST':
+    if request.method == "POST":
+        moshaver_pk = request.POST.get("moshaver")
+        city_pk = request.POST.get("city")
+        daneshkadeh_pk = request.POST.get("daneshkadeh")
         form = ReservationForm(request.POST or None)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.daneshjoo = request.user
-            instance.moshaver = 
+            instance.moshaver = MoshaverProfile.objects.filter(pk=moshaver_pk).first()
+            instance.city = City.objects.filter(pk=city_pk).first()
+            instance.daneshkadeh = Daneshkadeh.objects.filter(pk=daneshkadeh_pk).first()
 
+            instance.save()
+            messages.add_message(request, messages.SUCCESS, success_message)
+            return redirect("moshavere:index")
     else:
         form = ReservationForm()
-    
+
     context = {"moshaver": moshaver, "form": form}
     return render(request, "students/reservation_daneshkadeh.html", context)

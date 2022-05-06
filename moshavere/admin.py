@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (City, Consulation, MarakezMoshavere,
-                     MoshaverProfile, Daneshkadeh, Nazer)
+                     MoshaverProfile, Daneshkadeh, Nazer, Reservation)
 
 
 @admin.register(Consulation)
@@ -30,4 +30,8 @@ class DaneshkadehAdmin(admin.ModelAdmin):
 
 @admin.register(Nazer)
 class NazerAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Reservation)
+class ReservationAdmin(admin.ModelAdmin):
     pass
