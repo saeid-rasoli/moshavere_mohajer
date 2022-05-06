@@ -21,6 +21,7 @@ urlpatterns = [
     path('consulation/<slug:slug>/export/', views.export_form, name='export_form'),
     path('students/', views.students_view, name='students'),
     path('markaz-moshavere/<city>/', views.marakez_moshavere, name='markaz_moshavere'),
-    path('markaz-moshavere/', views.marakez_moshavere_all, name='markaz_moshavere_all')
-
+    path('markaz-moshavere/', views.marakez_moshavere_all, name='markaz_moshavere_all'),
+    path('reservation/', views.reservation_view, name='reservation'),
+    path('reservation/<daneshkadeh>/', views.reservation_daneshkadeh_view, name='reservation_daneshkadeh')
 ]

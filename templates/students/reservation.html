@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}رزور نوبت با مشاور{% endblock %}
+
+{% block content %}
+{% if user.email %}
+<div class="container my-5">
+    <p>
+        لطفا دانشکده خود را انتخاب کنید.
+    </p>
+    <br>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+        <div class="card h-100">
+            <img src="{% static 'imgs/mohajer_uni.jpg' %}" class="card-img-top img-fluid img-thumbnail" alt="دانشکده فنی شهید مهاجر اصفهان">
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text">روزرو مشاوره برای دانشکده فنی شهید مهاجر اصفهان</p>
+            </div>
+        <a href="{% url 'moshavere:reservation_daneshkadeh' daneshkadeh='دانشکده شهید مهاجر اصفهان' %}" class="btn btn-primary">ادامه</a>
+        </div>
+    </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-danger text-center">
+    شما دسترسی به این قسمت ندارید.
+</div>
+{% endif %}
+{% endblock %}

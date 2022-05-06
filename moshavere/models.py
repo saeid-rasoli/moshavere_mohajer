@@ -110,6 +110,7 @@ class Nazer(models.Model):
 
 class Reservation(models.Model):
     daneshjoo = models.OneToOneField(User, on_delete=models.CASCADE)
+    moshaver = models.ForeignKey(MoshaverProfile, on_delete=models.CASCADE)
     meli_code = models.IntegerField(unique=True, blank=True)
     student_number = models.IntegerField(unique=True, blank=True)
     city = models.OneToOneField(City, on_delete=models.CASCADE)

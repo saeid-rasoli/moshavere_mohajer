@@ -9,8 +9,18 @@ from django.db.models import Q
 from django.http import FileResponse
 from django.shortcuts import redirect, render
 
-from .forms import ConsulationForm, EmployeeProfileForm, DaneshjooSignupForm
-from .models import Consulation, MarakezMoshavere, MoshaverProfile
+from .forms import (
+    ConsulationForm,
+    EmployeeProfileForm,
+    DaneshjooSignupForm,
+    ReservationForm,
+)
+from .models import (
+    Consulation,
+    MarakezMoshavere,
+    MoshaverProfile,
+    Daneshkadeh,
+)
 from .scripts import students
 
 
@@ -255,3 +265,28 @@ def daneshjoo_signup(request):
         form = DaneshjooSignupForm()
     context = {"form": form}
     return render(request, "auth/signup.html", context)
+
+
+@login_required
+def reservation_view(request):
+    context = {}
+
+    return render(request, "students/reservation.html", context)
+
+
+@login_required
+def reservation_daneshkadeh_view(request, daneshkadeh):
+    success_message = "ثبت نام با موفقیت صورت گرفت"
+    moshaver = MoshaverProfile.objects.filter(daneshkadeh__name=daneshkadeh)
+    if request.method == 'POST':
+        form = ReservationForm(request.POST or None)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.daneshjoo = request.user
+            instance.moshaver = 
+
+    else:
+        form = ReservationForm()
+    
+    context = {"moshaver": moshaver, "form": form}
+    return render(request, "students/reservation_daneshkadeh.html", context)

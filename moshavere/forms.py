@@ -7,7 +7,7 @@ from django.contrib.auth.forms import (
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
-from .models import MoshaverProfile, Consulation
+from .models import MoshaverProfile, Consulation, Reservation
 from jalali_date.fields import JalaliDateField
 from jalali_date.widgets import AdminJalaliDateWidget
 
@@ -220,3 +220,21 @@ class DaneshjooSignupForm(UserCreationForm):
     class Meta:
         model = User
         fields = ["username", "email", "first_name", "last_name", "password1", "password2"]
+
+class ReservationForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ReservationForm, self).__init__(*args, **kwargs)
+
+        self.fields['meli_code'].label = 'کد ملی'
+        self.fields['meli_code'].widget.attrs.update({
+            'class': 'form-control'
+        })
+
+        self.fields['student_number'].label = 'شماره دانشجویی'
+        self.fields['student_number'].widget.attrs.update({
+            'class': 'form-control'
+        })
+    
+    class Meta:
+        model = Reservation
+        fields = ['meli_code', 'student_number']

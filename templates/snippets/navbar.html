@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col">
             <li class="nav-item" style="list-style: none;">
-                <a class="btn btn-outline-light btn-sm text-nowrap" href="#">رزرو نوبت</a>
+                <a class="btn btn-outline-light btn-sm text-nowrap" href="{% url 'moshavere:reservation' %}">رزرو نوبت</a>
             </li>
         </div>
         <div class="col m-0 p-0">
@@ -54,6 +54,7 @@
                         </li>
                         <li><a class="btn btn-success btn-sm ms-3" href="{% url 'moshavere:login' %}">ورود</a></li>
                         {% endif %}
+                        <li><a class="btn btn-primary btn-sm ms-3 mt-1" href="{% url 'moshavere:signup' %}">ثبت نام دانشجو</a></li>
                     </ul>
                 </div>
             </div>
