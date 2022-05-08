@@ -293,3 +293,9 @@ def reservation_daneshkadeh_view(request, daneshkadeh):
 
     context = {"moshaver": moshaver, "form": form}
     return render(request, "students/reservation_daneshkadeh.html", context)
+
+def about_us(request):
+    return render(request, 'about_us.html', {})
+
+def contact_us(request):
+    return render(request, 'contact_us.html', {})

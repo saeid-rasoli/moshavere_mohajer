@@ -29,8 +29,8 @@
                 <div class="offcanvas-body p-0 m-0">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li><a class="dropdown-item" href="{% url 'moshavere:index' %}">صفحه اصلی</a></li>
-                        <li><a class="dropdown-item" href="#">درباره ما</a></li>
-                        <li><a class="dropdown-item" href="#">تماس با ما</a></li>
+                        <li><a class="dropdown-item" href="{% url 'moshavere:about_us' %}">درباره ما</a></li>
+                        <li><a class="dropdown-item" href="{% url 'moshavere:contact_us' %}">تماس با ما</a></li>
                         {% if user.is_authenticated %}
                         {% if not user.email %}
                         <li><a class="dropdown-item" href="{% url 'moshavere:students' %}">دانشجویان</a></li>
