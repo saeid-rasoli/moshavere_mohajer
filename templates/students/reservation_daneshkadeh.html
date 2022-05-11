@@ -21,7 +21,13 @@
                 <input type="hidden" name="city" value="{{ i.city.pk }}"/>
                 <input type="hidden" name="daneshkadeh" value="{{ i.daneshkadeh.pk }}"/>
                 <p class="card-text">مشاور تحصیلی و شغلی {{ i.daneshkadeh }}</p>
-                <p class="card-text"><small>وقت مشاوره: {{ i.roozhaye_hozor }}</small></p>
+                <p class="card-text">
+                    <small>وقت مشاوره: 
+                        {% for j in i.roozhaye_hozor.all %}
+                        {{ j }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </small>
+                </p>
             </div>
                 {{ form.as_p }}
                 {{ form.media }}

@@ -7,12 +7,16 @@ from django.contrib.auth.forms import (
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
-from .models import MoshaverProfile, Consulation, Reservation
+from .models import MoshaverProfile, Consulation, Reservation, Days
 from jalali_date.fields import JalaliDateField
 from jalali_date.widgets import AdminJalaliDateWidget
 
 
 class EmployeeProfileForm(ModelForm):
+    roozhaye_hozor = forms.ModelMultipleChoiceField(
+        queryset=Days.objects.all(), required=True, widget=forms.CheckboxSelectMultiple
+    )
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["first_name"].widget.attrs.update(
@@ -27,6 +31,7 @@ class EmployeeProfileForm(ModelForm):
         self.fields["city"].label = "شهر مرکز مشاوره"
         self.fields["daneshkadeh"].widget.attrs.update({"class": "form-control"})
         self.fields["daneshkadeh"].label = "دانشکده"
+        self.fields["roozhaye_hozor"].label = "روز های حضور"
         self.fields["saghfe_mojaz_hafte"].widget.attrs.update({"class": "form-control"})
         self.fields[
             "saghfe_mojaz_hafte"
@@ -49,10 +54,6 @@ class EmployeeProfileForm(ModelForm):
         self.fields[
             "sazman_parvane_behzisti"
         ].label = "پروانه اشتغال تخصصی / سازمان نظام روانشناسی / بهزیستی"
-        self.fields["roozhaye_hozor"].widget.attrs.update(
-            {"class": "form-control", "placeholder": "شنبه،دوشنبه"}
-        )
-        self.fields["roozhaye_hozor"].label = "روز های حضور"
         self.fields["pedar_name"].widget.attrs.update({"class": "form-control"})
         self.fields["pedar_name"].label = "نام پدر"
         self.fields["shaba_number"].widget.attrs.update(

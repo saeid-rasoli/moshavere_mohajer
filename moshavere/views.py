@@ -39,6 +39,7 @@ def employee(request):
             instance = form.save(commit=False)
             instance.user = user
             instance.save()
+            form.save_m2m()
             messages.add_message(request, messages.SUCCESS, success_message)
             return redirect("moshavere:index")
     else:

@@ -22,7 +22,13 @@
                 <p>ساعت تایید شده در هفته: {{ profile.hours_weekly_authorized }}</p>
                 <p>آخرین مقطع تحصیلی: {{ profile.akharin_maghta_tahsili }}</p>
                 <p>نوع امتیاز: {{ profile.sazman_parvane_behzisti }}</p>
-                <p>روز های حضور: {{ profile.roozhaye_hozor }}</p>
+                <p>روز های حضور:
+                {% for rooz in profile.roozhaye_hozor.all %}
+                {{ rooz }}
+                {% if not forloop.last %}
+                    ,
+                {% endif %}
+                {% endfor %} </p>
                 <p>تاریخ تولد: {{ profile.birthday|to_jalali:'%Y/%m/%d' }}</p>
                 <p>شماره حساب: {{ profile.hesab_number }}</p>
             </div>

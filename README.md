@@ -35,6 +35,7 @@
 - [X] moshaver update profile page with jalali calander
 - [X] reserve for students can access after checking the student number and meli code
 - [X] contact us page
+- [ ] select time for reservation
 - [ ] about us page and phone number when reserving about us with moshavers and cities
 - [ ] date picker for reservation
 - [ ] moshavers can see the reserved students

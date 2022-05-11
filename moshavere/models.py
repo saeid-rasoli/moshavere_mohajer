@@ -40,6 +40,7 @@ class Days(models.Model):
         return self.days
 
 
+
 class Nobat(models.Model):
     days = models.ManyToManyField(Days)
     time = models.TimeField()
@@ -55,7 +56,7 @@ class MoshaverProfile(models.Model):
     meli_code = models.IntegerField(unique=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     daneshkadeh = models.ForeignKey(Daneshkadeh, on_delete=models.CASCADE)
-    nobat = models.ForeignKey(Nobat, on_delete=models.CASCADE)
+    roozhaye_hozor = models.ManyToManyField(Days)
     saghfe_mojaz_hafte = models.IntegerField(default=0)
     hours_weekly_authorized = models.IntegerField(default=0)
     type_hamkari_ba_daneshgah = models.CharField(
@@ -83,6 +84,7 @@ class Consulation(models.Model):
     mashroot_len = models.IntegerField(default=0)
     moadel = models.DecimalField(default=0, decimal_places=2, max_digits=4)
     arzyabi = models.CharField(max_length=20, choices=ARZYABI_CHOICES, default="عادی")
+    nobat = models.DateField(blank=True, null=True)
     erja_moshavere_tahsili = models.BooleanField(default=False)
     erja_moshavere_shoghli = models.BooleanField(default=False)
     erja_moshavere_balini = models.BooleanField(default=False)
