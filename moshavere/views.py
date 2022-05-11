@@ -50,16 +50,17 @@ def employee(request):
 @login_required
 def nazer(request):
     search_post = request.GET.get("search")
+    print('search:', search_post)
     if search_post:
         if len(search_post.split()) == 2:
             consulation_model = Consulation.objects.filter(
-                Q(author__user__first_name__startswith=search_post.split()[0])
-                & Q(author__user__last_name__startswith=search_post.split()[1])
+                Q(author__first_name__startswith=search_post.split()[0])
+                & Q(author__last_name__startswith=search_post.split()[1])
             )
         else:
             consulation_model = Consulation.objects.filter(
-                Q(author__user__first_name__icontains=search_post)
-                | Q(author__user__last_name__icontains=search_post)
+                Q(author__first_name__icontains=search_post)
+                | Q(author__last_name__icontains=search_post)
                 | Q(author__user__username__icontains=search_post)
             )
     else:

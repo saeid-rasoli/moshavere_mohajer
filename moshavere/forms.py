@@ -219,22 +219,45 @@ class DaneshjooSignupForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ["username", "email", "first_name", "last_name", "password1", "password2"]
+        fields = [
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+            "password1",
+            "password2",
+        ]
+
 
 class ReservationForm(forms.ModelForm):
+    YEAR_CHOICES = range(1377, 1300, -1)
+    MONTH_CHOICES = {
+        1: "فروردین",
+        2: "اردیبهشت",
+        3: "خرداد",
+        4: "تیر",
+        5: "مرداد",
+        6: "شهریور",
+        7: "مهر",
+        8: "آبان",
+        9: "آذر",
+        10: "دی",
+        11: "بهمن",
+        12: "اسفند",
+    }
+
     def __init__(self, *args, **kwargs):
         super(ReservationForm, self).__init__(*args, **kwargs)
 
-        self.fields['meli_code'].label = 'کد ملی'
-        self.fields['meli_code'].widget.attrs.update({
-            'class': 'form-control'
-        })
+        self.fields["meli_code"].label = "کد ملی"
+        self.fields["meli_code"].widget.attrs.update({"class": "form-control"})
 
-        self.fields['student_number'].label = 'شماره دانشجویی'
-        self.fields['student_number'].widget.attrs.update({
-            'class': 'form-control'
-        })
-    
+        self.fields["student_number"].label = "شماره دانشجویی"
+        self.fields["student_number"].widget.attrs.update({"class": "form-control"})
+
+        self.fields["phone_number"].label = "شماره موبایل"
+        self.fields["phone_number"].widget.attrs.update({"class": "form-control"})
+
     class Meta:
         model = Reservation
-        fields = ['meli_code', 'student_number']
+        fields = ["meli_code", "student_number", "phone_number"]

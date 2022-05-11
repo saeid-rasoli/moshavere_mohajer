@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load jalali_tags %}
 
 {% block title %}{% endblock %}
 
@@ -23,10 +24,10 @@
                 <p class="card-text"><small>وقت مشاوره: {{ i.roozhaye_hozor }}</small></p>
             </div>
                 {{ form.as_p }}
+                {{ form.media }}
             </div>
             <button class="btn btn-success" type="submit">رزور</button>
         </form>
-    </div>
     </div>
     </div>
     {% endfor %}

@@ -36,6 +36,8 @@
 - [X] reserve for students can access after checking the student number and meli code
 - [X] contact us page
 - [ ] about us page and phone number when reserving about us with moshavers and cities
+- [ ] date picker for reservation
 - [ ] moshavers can see the reserved students
 - [ ] nazer can create new moshaver for markaz
 - [ ] give premission to nazers for edit, delete and log for moshavers in markaz moshavere
+- [ ] add django-simple-captcha for signup students

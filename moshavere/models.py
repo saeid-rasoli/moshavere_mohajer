@@ -33,6 +33,21 @@ class Daneshkadeh(models.Model):
         return self.name
 
 
+class Days(models.Model):
+    days = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.days
+
+
+class Nobat(models.Model):
+    days = models.ManyToManyField(Days)
+    time = models.TimeField()
+
+    def __str__(self):
+        return f"{self.days} - {self.time}"
+
+
 class MoshaverProfile(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
@@ -40,6 +55,7 @@ class MoshaverProfile(models.Model):
     meli_code = models.IntegerField(unique=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     daneshkadeh = models.ForeignKey(Daneshkadeh, on_delete=models.CASCADE)
+    nobat = models.ForeignKey(Nobat, on_delete=models.CASCADE)
     saghfe_mojaz_hafte = models.IntegerField(default=0)
     hours_weekly_authorized = models.IntegerField(default=0)
     type_hamkari_ba_daneshgah = models.CharField(
@@ -51,7 +67,6 @@ class MoshaverProfile(models.Model):
         max_length=150, default="ندارد", choices=S_P_B
     )
     tarikh_shoro_faliyat = models.DateTimeField(auto_now_add=True)
-    roozhaye_hozor = models.CharField(max_length=250, blank=True, null=True)
     pedar_name = models.CharField(max_length=250, blank=True, null=True)
     birthday = models.DateField()
     shaba_number = models.CharField(max_length=250, blank=True, null=True)
@@ -71,7 +86,6 @@ class Consulation(models.Model):
     erja_moshavere_tahsili = models.BooleanField(default=False)
     erja_moshavere_shoghli = models.BooleanField(default=False)
     erja_moshavere_balini = models.BooleanField(default=False)
-    nobat = models.DateField(default=timezone.now)
     hozor = models.BooleanField(default=False)
     model_term_ghabl = models.DecimalField(default=0, decimal_places=2, max_digits=4)
     moshkel_asli = models.TextField(max_length=9000, blank=True)
@@ -82,7 +96,7 @@ class Consulation(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id or not self.slug:
-            slug_name = f"{self.author.user.username}-{self.nobat}-{self.id}"
+            slug_name = f"{self.author.user.username}-{self.author.nobat}-{self.id}"
             self.slug = slugify(slug_name)
 
         super(Consulation, self).save(*args, **kwargs)
@@ -113,8 +127,10 @@ class Reservation(models.Model):
     moshaver = models.ForeignKey(MoshaverProfile, on_delete=models.CASCADE)
     meli_code = models.IntegerField()
     student_number = models.IntegerField()
+    phone_number = models.IntegerField(blank=True, null=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     daneshkadeh = models.ForeignKey(Daneshkadeh, on_delete=models.CASCADE)
-    
+    nobat = models.ForeignKey(Nobat, on_delete=models.CASCADE, blank=True, null=True)
+
     def __str__(self):
-        return f'{self.daneshjoo.username} - مشاور({self.moshaver})'
+        return f"{self.daneshjoo.username} - مشاور({self.moshaver})"
