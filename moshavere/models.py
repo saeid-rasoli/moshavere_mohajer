@@ -40,15 +40,6 @@ class Days(models.Model):
         return self.days
 
 
-
-class Nobat(models.Model):
-    days = models.ManyToManyField(Days)
-    time = models.TimeField()
-
-    def __str__(self):
-        return f"{self.days} - {self.time}"
-
-
 class MoshaverProfile(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
@@ -76,6 +67,18 @@ class MoshaverProfile(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+
+class Nobat(models.Model):
+    day = models.CharField(max_length=50, blank=True, null=True)
+    time = models.CharField(max_length=50)
+    daneshjoo = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    moshaver = models.ForeignKey(
+        MoshaverProfile, on_delete=models.CASCADE, blank=True, null=True
+    )
+
+    def __str__(self):
+        return f"{self.day} - {self.time}"
 
 
 class Consulation(models.Model):
@@ -132,7 +135,6 @@ class Reservation(models.Model):
     phone_number = models.IntegerField(blank=True, null=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     daneshkadeh = models.ForeignKey(Daneshkadeh, on_delete=models.CASCADE)
-    nobat = models.ForeignKey(Nobat, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return f"{self.daneshjoo.username} - مشاور({self.moshaver})"

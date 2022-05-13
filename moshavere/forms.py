@@ -231,21 +231,19 @@ class DaneshjooSignupForm(UserCreationForm):
 
 
 class ReservationForm(forms.ModelForm):
-    YEAR_CHOICES = range(1377, 1300, -1)
-    MONTH_CHOICES = {
-        1: "فروردین",
-        2: "اردیبهشت",
-        3: "خرداد",
-        4: "تیر",
-        5: "مرداد",
-        6: "شهریور",
-        7: "مهر",
-        8: "آبان",
-        9: "آذر",
-        10: "دی",
-        11: "بهمن",
-        12: "اسفند",
-    }
+    TIME = (
+        ("۰۸:۳۰", "۰۸:۳۰"),
+        ("۰۹:۳۰", "۰۹:۳۰"),
+        ("۱۰:۳۰", "۱۰:۳۰"),
+        ("۱۱:۳۰", "۱۱:۳۰"),
+        ("۱۲:۳۰", "۱۲:۳۰"),
+        ("۱۳:۳۰", "۱۳:۳۰"),
+        ("۱۴:۳۰", "۱۴:۳۰"),
+        ("۱۵:۳۰", "۱۵:۳۰"),
+    )
+
+    time = forms.ChoiceField(choices=TIME)
+    phone_number = forms.IntegerField(required=True)
 
     def __init__(self, *args, **kwargs):
         super(ReservationForm, self).__init__(*args, **kwargs)
@@ -259,6 +257,15 @@ class ReservationForm(forms.ModelForm):
         self.fields["phone_number"].label = "شماره موبایل"
         self.fields["phone_number"].widget.attrs.update({"class": "form-control"})
 
+        self.fields["time"].label = "ساعت مشاوره"
+        self.fields["time"].widget.attrs.update({"class": "form-select text-center", "name": "time"})
+
     class Meta:
         model = Reservation
-        fields = ["meli_code", "student_number", "phone_number"]
+        fields = ["meli_code", "student_number", "phone_number", "time"]
+
+    def clean(self):
+        meli_code = str(self.cleaned_data["meli_code"])
+
+        if len(meli_code) != 10:
+            raise forms.ValidationError("کُد ملی نا معتبر")

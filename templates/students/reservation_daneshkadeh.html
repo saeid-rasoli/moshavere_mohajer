@@ -1,40 +1,45 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load jalali_tags %}
 
 {% block title %}{% endblock %}
 
 {% block content %}
 {% if user.email %}
 <div class="container my-5">
-<h4>مشاور های {{ moshaver.first.daneshkadeh }}</h4>
-<br>
+    <h4>مشاور های {{ moshaver.first.daneshkadeh }}</h4>
+    <br>
     {% for i in moshaver %}
     <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-        <div class="card h-100">
-        <div class="card-body text-center">
-            <form method="POST">{% csrf_token %}
-            <div class="alert alert-info">
-                <h5 class="card-title mb-3">{{ i }}</h5>
-                <input type="hidden" name="moshaver" value="{{ i.pk }}"/>
-                <input type="hidden" name="city" value="{{ i.city.pk }}"/>
-                <input type="hidden" name="daneshkadeh" value="{{ i.daneshkadeh.pk }}"/>
-                <p class="card-text">مشاور تحصیلی و شغلی {{ i.daneshkadeh }}</p>
-                <p class="card-text">
-                    <small>وقت مشاوره: 
-                        {% for j in i.roozhaye_hozor.all %}
-                        {{ j }}{% if not forloop.last %}, {% endif %}
-                        {% endfor %}
-                    </small>
-                </p>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <form method="POST">{% csrf_token %}
+                        <div class="alert alert-info">
+                            <h5 class="card-title mb-3">{{ i }}</h5>
+                            <input type="hidden" name="moshaver" value="{{ i.pk }}" />
+                            <input type="hidden" name="city" value="{{ i.city.pk }}" />
+                            <input type="hidden" name="daneshkadeh" value="{{ i.daneshkadeh.pk }}" />
+                            <p class="card-text">مشاور تحصیلی و شغلی {{ i.daneshkadeh }}</p>
+                            <p class="card-text">
+                                <small>وقت مشاوره:
+                                    {% for j in i.roozhaye_hozor.all %}
+                                    {{ j }}{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </small>
+                            </p>
+                        </div>
+                        {{ form.as_p }}
+                            <label for="formselect">روز مشاوره:</label>
+                            <select class="form-select text-center" id="formselect" name="day" aria-label="Default select example">
+                            {% for j in i.roozhaye_hozor.all %}
+                            <option value="{{ j }}">{{ j }}</option>
+                            {% endfor %}
+                            </select>
+                        <button class="btn btn-success mt-3" type="submit">رزور</button>
+                    </form>
+                </div>
             </div>
-                {{ form.as_p }}
-                {{ form.media }}
-            </div>
-            <button class="btn btn-success" type="submit">رزور</button>
-        </form>
-    </div>
+        </div>
     </div>
     {% endfor %}
 </div>

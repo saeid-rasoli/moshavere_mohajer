@@ -15,7 +15,14 @@ from .forms import (
     DaneshjooSignupForm,
     ReservationForm,
 )
-from .models import Consulation, MarakezMoshavere, MoshaverProfile, Daneshkadeh, City
+from .models import (
+    Consulation,
+    MarakezMoshavere,
+    MoshaverProfile,
+    Daneshkadeh,
+    City,
+    Nobat,
+)
 from .scripts import students
 
 
@@ -51,7 +58,7 @@ def employee(request):
 @login_required
 def nazer(request):
     search_post = request.GET.get("search")
-    print('search:', search_post)
+    print("search:", search_post)
     if search_post:
         if len(search_post.split()) == 2:
             consulation_model = Consulation.objects.filter(
@@ -279,6 +286,8 @@ def reservation_daneshkadeh_view(request, daneshkadeh):
         moshaver_pk = request.POST.get("moshaver")
         city_pk = request.POST.get("city")
         daneshkadeh_pk = request.POST.get("daneshkadeh")
+        time = request.POST.get("time")
+        day = request.POST.get("day")
         form = ReservationForm(request.POST or None)
         if form.is_valid():
             instance = form.save(commit=False)
@@ -286,6 +295,12 @@ def reservation_daneshkadeh_view(request, daneshkadeh):
             instance.moshaver = MoshaverProfile.objects.filter(pk=moshaver_pk).first()
             instance.city = City.objects.filter(pk=city_pk).first()
             instance.daneshkadeh = Daneshkadeh.objects.filter(pk=daneshkadeh_pk).first()
+            Nobat.objects.create(
+                day=day,
+                time=time,
+                daneshjoo=request.user,
+                moshaver=MoshaverProfile.objects.filter(pk=moshaver_pk).first(),
+            )
 
             instance.save()
             messages.add_message(request, messages.SUCCESS, success_message)
@@ -296,8 +311,10 @@ def reservation_daneshkadeh_view(request, daneshkadeh):
     context = {"moshaver": moshaver, "form": form}
     return render(request, "students/reservation_daneshkadeh.html", context)
 
+
 def about_us(request):
-    return render(request, 'about_us.html', {})
+    return render(request, "about_us.html", {})
+
 
 def contact_us(request):
-    return render(request, 'contact_us.html', {})
+    return render(request, "contact_us.html", {})
