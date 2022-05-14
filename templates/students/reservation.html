@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}رزور نوبت با مشاور{% endblock %}
+{% block title %}رزرو نوبت با مشاور{% endblock %}
 
 {% block content %}
 {% if user.email %}
 {% if user.reservation_set.all.first %}
 <div class="alert alert-warning text-center">
-    شما قبلا درخواست رزور برای مشاور داده اید.
+    شما قبلا درخواست رزرو برای مشاور داده اید.
 </div>
 {% endif %}
 <div class="container my-5">
@@ -21,7 +21,7 @@
             <img src="{% static 'imgs/mohajer_uni.jpg' %}" class="card-img-top img-fluid img-thumbnail" alt="دانشکده فنی شهید مهاجر اصفهان">
             <div class="card-body">
                 <h5 class="card-title"></h5>
-                <p class="card-text">روزرو مشاوره برای دانشکده فنی شهید مهاجر اصفهان</p>
+                <p class="card-text">رزرو مشاوره برای دانشکده فنی شهید مهاجر اصفهان</p>
             </div>
         <a href="{% url 'moshavere:reservation_daneshkadeh' daneshkadeh='دانشکده شهید مهاجر اصفهان' %}" class="btn btn-primary">ادامه</a>
         </div>

@@ -135,6 +135,14 @@ class Reservation(models.Model):
     phone_number = models.IntegerField(blank=True, null=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     daneshkadeh = models.ForeignKey(Daneshkadeh, on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=200, allow_unicode=True, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.id or not self.slug:
+            slug_name = f"{self.student_number}-{self.id}"
+            self.slug = slugify(slug_name)
+
+        super(Reservation, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.daneshjoo.username} - مشاور({self.moshaver})"

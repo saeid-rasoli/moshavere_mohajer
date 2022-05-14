@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load moshavere_extra %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+{% with user.username|split_ret_last:"-" as job %}
+{% if not user.email and job == 'moshaver' %}
+<div class="container my-5">
+    <h3>درخواست های شما برای مشاوره:</h3>
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">شماره</th>
+                            <th scope="col">نام و نام خانوادگی</th>
+                            <th scope="col">شماره دانشجویی</th>
+                            <th scope="col">کُد ملی</th>
+                            <th scope="col">شماره موبایل</th>
+                            <th scope="col">روز مشاوره</th>
+                            <th scope="col">ساعت مشاوره</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in reserved_requests_model %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ i.daneshjoo.first_name }} {{ i.daneshjoo.last_name }}</td>
+                            <td>{{ i.student_number }}</td>
+                            <td>{{ i.meli_code }}</td>
+                            <td>0{{ i.phone_number }}</td>
+                            <td>{{ nobat.day }}</td>
+                            <td>{{ nobat.time }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-danger text-center">
+    شما دسترسی به این قسمت ندارید.
+</div>
+{% endif %}
+{% endwith %}
+{% endblock %}

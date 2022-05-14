@@ -9,7 +9,6 @@ user_login_form = UserLoginForm
 
 urlpatterns = [
     path('', views.index, name='index'),
-    # path('signup/', views.signup, name='signup'),
     path('login/', auth_views.LoginView.as_view(template_name='auth/login.html',
          authentication_form=user_login_form), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='auth/logout.html'), name='logout'),
@@ -25,5 +24,7 @@ urlpatterns = [
     path('reservation/', views.reservation_view, name='reservation'),
     path('reservation/<daneshkadeh>/', views.reservation_daneshkadeh_view, name='reservation_daneshkadeh'),
     path('about-us/', views.about_us, name='about_us'),
-    path('contact-us/', views.contact_us, name='contact_us')
+    path('contact-us/', views.contact_us, name='contact_us'),
+    path('reserved-requests/<moshaver>/', views.reserved_requests, name='reserved_requests')
+
 ]

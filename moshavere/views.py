@@ -22,6 +22,7 @@ from .models import (
     Daneshkadeh,
     City,
     Nobat,
+    Reservation
 )
 from .scripts import students
 
@@ -318,3 +319,13 @@ def about_us(request):
 
 def contact_us(request):
     return render(request, "contact_us.html", {})
+
+@login_required
+def reserved_requests(request, moshaver):
+    reserved_requests_model = Reservation.objects.filter(moshaver__user__username=moshaver)
+    nobat = Nobat.objects.filter(moshaver__user__username=moshaver).first()
+    context = {
+        'reserved_requests_model': reserved_requests_model,
+        'nobat': nobat
+    }
+    return render(request, 'students/reserved_requests.html', context)

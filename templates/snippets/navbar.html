@@ -41,6 +41,7 @@
                             {% elif job == 'moshaver' %}
                             <li><a class="dropdown-item" href="{% url 'moshavere:employee' %}">پروفایل</a></li>
                             <li><a class="dropdown-item" href="{% url 'moshavere:consulation' %}">مشاوره</a></li>
+                            <li><a class="dropdown-item" href="{% url 'moshavere:reserved_requests' moshaver=request.user.username %}">درخواست های مشاوره</a></li>
                             {% endif %}
                             {% endwith %}
                         {% endif %}
