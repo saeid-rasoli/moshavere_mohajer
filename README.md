@@ -37,6 +37,14 @@
 - [X] contact us page
 - [X] select time and day for reservation
 - [X] moshavers can see the reserved students
+- [X] reserved marhale badd
+- [ ] filter nazer search consulation by date
+- [ ] add consulation field added model to nazer consulation detail
+- [ ] time delete for reservation and add to consulation log
+- [ ] profile enter info about themselves
+- [ ] export profile excel
+- [ ] moshavers have specific time for reservation
+- [ ] reserved request button for moshavere (takmil form)
 - [ ] moshavers can delete reserved moshavere
 - [ ] prevent duplicate reserved moshavere
 - [ ] nazer can create new moshaver for markaz

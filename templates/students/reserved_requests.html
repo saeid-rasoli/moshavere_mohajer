@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load moshavere_extra %}
+{% load jalali_tags %}
 
 {% block title %}{% endblock %}
 
@@ -20,8 +21,8 @@
                             <th scope="col">شماره دانشجویی</th>
                             <th scope="col">کُد ملی</th>
                             <th scope="col">شماره موبایل</th>
+                            <th scope="col">تاریخ مشاوره</th>
                             <th scope="col">روز مشاوره</th>
-                            <th scope="col">ساعت مشاوره</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,8 +33,8 @@
                             <td>{{ i.student_number }}</td>
                             <td>{{ i.meli_code }}</td>
                             <td>0{{ i.phone_number }}</td>
+                            <td>{{ i.tarikh|to_jalali:'%Y/%m/%d' }}</td>
                             <td>{{ nobat.day }}</td>
-                            <td>{{ nobat.time }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

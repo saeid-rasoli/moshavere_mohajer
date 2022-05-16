@@ -116,12 +116,28 @@ class UserLoginForm(AuthenticationForm):
 class ConsulationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ConsulationForm, self).__init__(*args, **kwargs)
+        self.fields["daneshjoo_first_name"].label = "نام دانشجو"
+        self.fields["daneshjoo_first_name"].widget.attrs.update({"class": "form-control"})
+        self.fields["daneshjoo_last_name"].label = "نام خانوادگی دانشجو"
+        self.fields["daneshjoo_last_name"].widget.attrs.update({"class": "form-control"})
+        self.fields["daneshjoo_student_number"].label = "شماره دانشجویی"
+        self.fields["daneshjoo_student_number"].widget.attrs.update({"class": "form-control"})
+        self.fields["daneshjoo_meli_number"].label = "کُد ملی دانشجو"
+        self.fields["daneshjoo_meli_number"].widget.attrs.update({"class": "form-control"})
         self.fields["mashroot_len"].label = "تعداد ترم های مشروطی"
         self.fields["mashroot_len"].widget.attrs.update({"class": "form-control"})
-        self.fields["moadel"].label = "معدل"
+        self.fields["moadel"].label = "معدل کل"
         self.fields["moadel"].widget.attrs.update({"class": "form-control"})
+        self.fields["model_term_ghabl"].label = "معدل ترم قبل"
+        self.fields["model_term_ghabl"].widget.attrs.update({"class": "form-control"})
         self.fields["arzyabi"].label = "ارزیابی و تشخیص مشاور"
         self.fields["arzyabi"].widget.attrs.update({"class": "form-control"})
+        self.fields["tedad_jalasat_moshavere"].label = "تعداد جلسات مشاوره"
+        self.fields["tedad_jalasat_moshavere"].widget.attrs.update({"class": "form-control"})
+        self.fields["erja_ravanpezeshk"].label = "ارجاع به روان پزشک"
+        self.fields["erja_ravanpezeshk"].widget.attrs.update(
+            {"class": "form-check-input"}
+        )
         self.fields["erja_moshavere_tahsili"].label = "ارجاع مشاوره تحصیلی"
         self.fields["erja_moshavere_tahsili"].widget.attrs.update(
             {"class": "form-check-input"}
@@ -134,12 +150,10 @@ class ConsulationForm(forms.ModelForm):
         self.fields["erja_moshavere_balini"].widget.attrs.update(
             {"class": "form-check-input"}
         )
-        self.fields["hozor"].label = "حضور"
-        self.fields["hozor"].widget.attrs.update({"class": "form-check-input"})
-        self.fields["model_term_ghabl"].label = "معدل ترم قبل"
-        self.fields["model_term_ghabl"].widget.attrs.update({"class": "form-control"})
         self.fields["moshkel_asli"].label = "مشکل اصلی"
-        self.fields["moshkel_asli"].widget.attrs.update({"class": "form-control"})
+        self.fields["moshkel_asli"].widget.attrs.update({"class": "form-control", "style": "max-height: 50px;"})
+        self.fields["moshkel_feli"].label = "مشکل فعلی"
+        self.fields["moshkel_feli"].widget.attrs.update({"class": "form-control"})
         self.fields["neshanehaye_raftari"].label = "نشانه های رفتاری"
         self.fields["neshanehaye_raftari"].widget.attrs.update(
             {"class": "form-control"}
@@ -151,7 +165,7 @@ class ConsulationForm(forms.ModelForm):
             {"class": "form-control"}
         )
         self.fields["nobat"] = JalaliDateField(
-            label=("نوبت"),
+            label=("تاریخ مشاوره"),
             widget=AdminJalaliDateWidget,
         )
         self.fields["nobat"].widget.attrs.update(
@@ -173,7 +187,7 @@ class DaneshjooSignupForm(UserCreationForm):
         self.fields["username"].widget.attrs.update(
             {
                 "class": "form-control",
-                "placeholder": "نام کاربری با زبان انگلیسی",
+                "placeholder": "نام دانشجو به زبان انگلیسی",
             }
         )
         self.fields["email"].label = "ایمیل"
@@ -231,18 +245,6 @@ class DaneshjooSignupForm(UserCreationForm):
 
 
 class ReservationForm(forms.ModelForm):
-    TIME = (
-        ("۰۸:۳۰", "۰۸:۳۰"),
-        ("۰۹:۳۰", "۰۹:۳۰"),
-        ("۱۰:۳۰", "۱۰:۳۰"),
-        ("۱۱:۳۰", "۱۱:۳۰"),
-        ("۱۲:۳۰", "۱۲:۳۰"),
-        ("۱۳:۳۰", "۱۳:۳۰"),
-        ("۱۴:۳۰", "۱۴:۳۰"),
-        ("۱۵:۳۰", "۱۵:۳۰"),
-    )
-
-    time = forms.ChoiceField(choices=TIME)
     phone_number = forms.IntegerField(required=True)
 
     def __init__(self, *args, **kwargs):
@@ -257,12 +259,20 @@ class ReservationForm(forms.ModelForm):
         self.fields["phone_number"].label = "شماره موبایل"
         self.fields["phone_number"].widget.attrs.update({"class": "form-control"})
 
-        self.fields["time"].label = "ساعت مشاوره"
-        self.fields["time"].widget.attrs.update({"class": "form-select text-center", "name": "time"})
+        self.fields["tarikh"] = JalaliDateField(
+            label=("تاریخ مشاوره"),
+            widget=AdminJalaliDateWidget,
+        )
+        self.fields["tarikh"].widget.attrs.update(
+            {
+                "class": "form-control text-center jalali_date-date",
+                "placeholder": "برای انتخاب تاریخ کلیک کنید",
+            }
+        )
 
     class Meta:
         model = Reservation
-        fields = ["meli_code", "student_number", "phone_number", "time"]
+        fields = ["tarikh", "meli_code", "student_number", "phone_number"]
 
     def clean(self):
         meli_code = str(self.cleaned_data["meli_code"])

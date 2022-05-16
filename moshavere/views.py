@@ -22,7 +22,7 @@ from .models import (
     Daneshkadeh,
     City,
     Nobat,
-    Reservation
+    Reservation,
 )
 from .scripts import students
 
@@ -280,14 +280,27 @@ def reservation_view(request):
 
 
 @login_required
-def reservation_daneshkadeh_view(request, daneshkadeh):
-    success_message = "درخواست مشاوره شما با موفقیت ثبت شد."
+def reservation_moshaver(request, daneshkadeh):
     moshaver = MoshaverProfile.objects.filter(daneshkadeh__name=daneshkadeh)
+    moshaver_username = request.POST.get("moshaver")
+    if request.method == "POST":
+        return redirect(
+            "moshavere:reservation_moshaver",
+            daneshkadeh=daneshkadeh,
+            moshaver=moshaver_username,
+        )
+    context = {"moshaver": moshaver}
+    return render(request, "students/reservation_moshaver.html", context)
+
+
+@login_required
+def reservation_daneshkadeh_view(request, daneshkadeh, moshaver):
+    success_message = "درخواست مشاوره شما با موفقیت ثبت شد."
+    moshaver = MoshaverProfile.objects.filter(user__username=moshaver).first()
     if request.method == "POST":
         moshaver_pk = request.POST.get("moshaver")
         city_pk = request.POST.get("city")
         daneshkadeh_pk = request.POST.get("daneshkadeh")
-        time = request.POST.get("time")
         day = request.POST.get("day")
         form = ReservationForm(request.POST or None)
         if form.is_valid():
@@ -298,7 +311,6 @@ def reservation_daneshkadeh_view(request, daneshkadeh):
             instance.daneshkadeh = Daneshkadeh.objects.filter(pk=daneshkadeh_pk).first()
             Nobat.objects.create(
                 day=day,
-                time=time,
                 daneshjoo=request.user,
                 moshaver=MoshaverProfile.objects.filter(pk=moshaver_pk).first(),
             )
@@ -320,12 +332,12 @@ def about_us(request):
 def contact_us(request):
     return render(request, "contact_us.html", {})
 
+
 @login_required
 def reserved_requests(request, moshaver):
-    reserved_requests_model = Reservation.objects.filter(moshaver__user__username=moshaver)
+    reserved_requests_model = Reservation.objects.filter(
+        moshaver__user__username=moshaver
+    )
     nobat = Nobat.objects.filter(moshaver__user__username=moshaver).first()
-    context = {
-        'reserved_requests_model': reserved_requests_model,
-        'nobat': nobat
-    }
-    return render(request, 'students/reserved_requests.html', context)
+    context = {"reserved_requests_model": reserved_requests_model, "nobat": nobat}
+    return render(request, "students/reserved_requests.html", context)

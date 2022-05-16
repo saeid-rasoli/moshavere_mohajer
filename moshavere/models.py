@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.template.defaultfilters import slugify
 
-ARZYABI_CHOICES = (("عادی", "عادی"), ("وسواس", "وسواس"), ("مضطرب", "مضطرب"))
 TYPE_HAMKARI = (
     ("مدعو", "مدعو"),
     ("رسمی", "رسمی"),
@@ -71,29 +70,34 @@ class MoshaverProfile(models.Model):
 
 class Nobat(models.Model):
     day = models.CharField(max_length=50, blank=True, null=True)
-    time = models.CharField(max_length=50)
     daneshjoo = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     moshaver = models.ForeignKey(
         MoshaverProfile, on_delete=models.CASCADE, blank=True, null=True
     )
 
     def __str__(self):
-        return f"{self.day} - {self.time}"
+        return f"{self.day}"
 
 
 class Consulation(models.Model):
     author = models.OneToOneField(MoshaverProfile, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
+    daneshjoo_first_name = models.CharField(max_length=60, null=True, blank=True)
+    daneshjoo_last_name = models.CharField(max_length=60, null=True, blank=True)
+    daneshjoo_student_number = models.IntegerField(default=0, null=True, blank=True)
+    daneshjoo_meli_number = models.IntegerField(default=0, null=True, blank=True)
     mashroot_len = models.IntegerField(default=0)
     moadel = models.DecimalField(default=0, decimal_places=2, max_digits=4)
-    arzyabi = models.CharField(max_length=20, choices=ARZYABI_CHOICES, default="عادی")
+    model_term_ghabl = models.DecimalField(default=0, decimal_places=2, max_digits=4)
     nobat = models.DateField(blank=True, null=True)
+    tedad_jalasat_moshavere = models.IntegerField(default=0, null=True, blank=True)
+    erja_ravanpezeshk = models.BooleanField(default=False)
+    erja_moshavere_balini = models.BooleanField(default=False)
     erja_moshavere_tahsili = models.BooleanField(default=False)
     erja_moshavere_shoghli = models.BooleanField(default=False)
-    erja_moshavere_balini = models.BooleanField(default=False)
-    hozor = models.BooleanField(default=False)
-    model_term_ghabl = models.DecimalField(default=0, decimal_places=2, max_digits=4)
-    moshkel_asli = models.TextField(max_length=9000, blank=True)
+    moshkel_asli = models.TextField(max_length=900, blank=True)
+    moshkel_feli = models.TextField(max_length=9000, blank=True)
+    arzyabi = models.CharField(max_length=200)
     neshanehaye_raftari = models.TextField(max_length=9000, blank=True)
     ahdaf_modakhele = models.TextField(max_length=9000, blank=True)
     farayande_modakhele = models.TextField(max_length=9000, blank=True)
@@ -101,7 +105,7 @@ class Consulation(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id or not self.slug:
-            slug_name = f"{self.author.user.username}-{self.author.nobat}-{self.id}"
+            slug_name = f"{self.author.user.username}-{self.nobat}-{self.id}"
             self.slug = slugify(slug_name)
 
         super(Consulation, self).save(*args, **kwargs)
@@ -135,6 +139,7 @@ class Reservation(models.Model):
     phone_number = models.IntegerField(blank=True, null=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     daneshkadeh = models.ForeignKey(Daneshkadeh, on_delete=models.CASCADE)
+    tarikh = models.DateField(blank=True, null=True)
     slug = models.SlugField(max_length=200, allow_unicode=True, null=True, blank=True)
 
     def save(self, *args, **kwargs):
