@@ -91,7 +91,6 @@ class EmployeeProfileForm(ModelForm):
         elif MoshaverProfile.objects.filter(meli_code=meli_code).exists():
             raise forms.ValidationError("کاربری با این کُد ملی قبلا ثبت نام کرده است")
 
-
 class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         self.error_messages["invalid_login"] = "Custom error"
@@ -117,13 +116,21 @@ class ConsulationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ConsulationForm, self).__init__(*args, **kwargs)
         self.fields["daneshjoo_first_name"].label = "نام دانشجو"
-        self.fields["daneshjoo_first_name"].widget.attrs.update({"class": "form-control"})
+        self.fields["daneshjoo_first_name"].widget.attrs.update(
+            {"class": "form-control"}
+        )
         self.fields["daneshjoo_last_name"].label = "نام خانوادگی دانشجو"
-        self.fields["daneshjoo_last_name"].widget.attrs.update({"class": "form-control"})
+        self.fields["daneshjoo_last_name"].widget.attrs.update(
+            {"class": "form-control"}
+        )
         self.fields["daneshjoo_student_number"].label = "شماره دانشجویی"
-        self.fields["daneshjoo_student_number"].widget.attrs.update({"class": "form-control"})
+        self.fields["daneshjoo_student_number"].widget.attrs.update(
+            {"class": "form-control"}
+        )
         self.fields["daneshjoo_meli_number"].label = "کُد ملی دانشجو"
-        self.fields["daneshjoo_meli_number"].widget.attrs.update({"class": "form-control"})
+        self.fields["daneshjoo_meli_number"].widget.attrs.update(
+            {"class": "form-control"}
+        )
         self.fields["mashroot_len"].label = "تعداد ترم های مشروطی"
         self.fields["mashroot_len"].widget.attrs.update({"class": "form-control"})
         self.fields["moadel"].label = "معدل کل"
@@ -132,8 +139,12 @@ class ConsulationForm(forms.ModelForm):
         self.fields["model_term_ghabl"].widget.attrs.update({"class": "form-control"})
         self.fields["arzyabi"].label = "ارزیابی و تشخیص مشاور"
         self.fields["arzyabi"].widget.attrs.update({"class": "form-control"})
+        self.fields["time"].label = "ساعت مشاوره با دانشجو"
+        self.fields["time"].widget.attrs.update({"class": "form-control"})
         self.fields["tedad_jalasat_moshavere"].label = "تعداد جلسات مشاوره"
-        self.fields["tedad_jalasat_moshavere"].widget.attrs.update({"class": "form-control"})
+        self.fields["tedad_jalasat_moshavere"].widget.attrs.update(
+            {"class": "form-control"}
+        )
         self.fields["erja_ravanpezeshk"].label = "ارجاع به روان پزشک"
         self.fields["erja_ravanpezeshk"].widget.attrs.update(
             {"class": "form-check-input"}
@@ -151,7 +162,9 @@ class ConsulationForm(forms.ModelForm):
             {"class": "form-check-input"}
         )
         self.fields["moshkel_asli"].label = "مشکل اصلی"
-        self.fields["moshkel_asli"].widget.attrs.update({"class": "form-control", "style": "max-height: 50px;"})
+        self.fields["moshkel_asli"].widget.attrs.update(
+            {"class": "form-control", "style": "max-height: 50px;"}
+        )
         self.fields["moshkel_feli"].label = "مشکل فعلی"
         self.fields["moshkel_feli"].widget.attrs.update({"class": "form-control"})
         self.fields["neshanehaye_raftari"].label = "نشانه های رفتاری"

@@ -90,6 +90,7 @@ class Consulation(models.Model):
     moadel = models.DecimalField(default=0, decimal_places=2, max_digits=4)
     model_term_ghabl = models.DecimalField(default=0, decimal_places=2, max_digits=4)
     nobat = models.DateField(blank=True, null=True)
+    time = models.CharField(max_length=100, blank=True, null=True)
     tedad_jalasat_moshavere = models.IntegerField(default=0, null=True, blank=True)
     erja_ravanpezeshk = models.BooleanField(default=False)
     erja_moshavere_balini = models.BooleanField(default=False)

@@ -22,6 +22,18 @@
                 <td>{{ consulation_detail.author.first_name }} {{ consulation_detail.author.last_name }}</td>
             </tr>
             <tr>
+                <th>دانشجو:</th>
+                <td>{{ consulation_detail.daneshjoo_first_name }} {{ consulation_detail.daneshjoo_last_name }}</td>
+            </tr>
+            <tr>
+                <th>شماره دانشجویی:</th>
+                <td>{{ consulation_detail.daneshjoo_student_number }}</td>
+            </tr>
+            <tr>
+                <th>کُد ملی دانشجو:</th>
+                <td>{{ consulation_detail.daneshjoo_meli_number }}</td>
+            </tr>
+            <tr>
                 <th>ترم های مشروطی:</th>
                 <td>{{ consulation_detail.mashroot_len }}</td>
             </tr>
@@ -30,8 +42,16 @@
                 <td>{{ consulation_detail.moadel }}</td>
             </tr>
             <tr>
-                <th>ارزیابی:</th>
-                <td>{{ consulation_detail.arzyabi }}</td>
+                <th>معدل ترم قبل:</th>
+                <td>{{ consulation_detail.model_term_ghabl }}</td>
+            </tr>
+            <tr>
+                <th>ارجاع به روانپزشک</th>
+                <td>{% if consulation_detail.erja_ravanpezeshk == True %}بله{% else %}خیر{% endif %}</td>
+            </tr>
+            <tr>
+                <th>ارجاع به مشاوره بالینی:</th>
+                <td>{% if consulation_detail.erja_moshavere_balini == True %}بله{% else %}خیر{% endif %}</td>
             </tr>
             <tr>
                 <th>ارجاع به مشاوره تحصیلی:</th>
@@ -42,24 +62,28 @@
                 <td>{% if consulation_detail.erja_moshavere_shoghli == True %}بله{% else %}خیر{% endif %}</td>
             </tr>
             <tr>
-                <th>ارجاع به مشاوره بالینی:</th>
-                <td>{% if consulation_detail.erja_moshavere_balini == True %}بله{% else %}خیر{% endif %}</td>
+                <th>تاریخ مشاوره حضوری:</th>
+                <td>{{ consulation_detail.nobat|to_jalali:'%Y/%m/%d' }}</td>
             </tr>
             <tr>
-                <th>نوبت:</th>
-                <td>{{ consulation_detail.nobat|to_jalali:'%y/%m/%d' }}</td>
+                <th>ساعت مشاوره:</th>
+                <td>{{ consulation_detail.time }}</td>
             </tr>
             <tr>
-                <th>حضور:</th>
-                <td>{% if consulation_detail.hozor == True %}بله{% else %}خیر{% endif %}</td>
-            </tr>
-            <tr>
-                <th>معدل ترم قبل:</th>
-                <td>{{ consulation_detail.model_term_ghabl }}</td>
+                <th>تعداد جلسات مشاوره:</th>
+                <td>{{ consulation_detail.tedad_jalasat_moshavere }}</td>
             </tr>
             <tr>
                 <th>مشکل اصلی:</th>
                 <td>{{ consulation_detail.moshkel_asli }}</td>
+            </tr>
+            <tr>
+                <th>مشکل فعلی:</th>
+                <td>{{ consulation_detail.moshkel_feli}}</td>
+            </tr>
+            <tr>
+                <th>ارزیابی:</th>
+                <td>{{ consulation_detail.arzyabi}}</td>
             </tr>
             <tr>
                 <th>نشانه های رفتاری:</th>

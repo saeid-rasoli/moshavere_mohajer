@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import FileResponse
 from django.shortcuts import redirect, render
+from jalali_date import date2jalali
 
 from .forms import (
     ConsulationForm,
@@ -118,25 +119,56 @@ def export_form(request, slug):
     worksheet = workbook.add_worksheet()
     headers = [
         "مشاور",
+        "دانشجو",
+        "شماره دانشجویی",
+        "کُد ملی دانشجو",
         "ترم های مشروطی",
         "معدل",
-        "ارزیابی",
+        "معدل ترم بعد",
+        "ارجاع به روانپزشک",
+        "ارجاع به مشاوره بالینی",
         "ارجاع به مشاوره تحصیلی",
         "ارجاع به مشاوره شغلی",
-        "ارجاع به مشاوره بالینی",
-        "نوبت",
-        "حضور",
-        "معدل ترم بعد",
+        "تاریخ مشاوره حضوری",
+        "ساعت مشاوره",
+        "تعداد جلسات مشاوره",
         "مشکل اصلی",
+        "مشکل فعلی",
+        "ارزیابی",
         "نشانه های رفتاری",
         "اهداف مداخله",
         "فرایند مداخله",
     ]
-    cols = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N"]
+    cols = [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+    ]
+    cdr = ""
     cde = ""
     cds = ""
     cdt = ""
-    hozor = ""
+    if consulation_detail_model.erja_ravanpezeshk == True:
+        cdr = "بله"
+    else:
+        cdr = "خیر"
     if consulation_detail_model.erja_moshavere_balini == True:
         cdb = "بله"
     else:
@@ -149,10 +181,6 @@ def export_form(request, slug):
         cdt = "بله"
     else:
         cdt = "خیر"
-    if consulation_detail_model.hozor == True:
-        hozor = "بله"
-    else:
-        hozor = "خیر"
 
     header_format = workbook.add_format(
         {"bg_color": "yellow", "align": "center", "font_size": 13}
@@ -163,24 +191,38 @@ def export_form(request, slug):
     for i in range(len(headers)):
         worksheet.write(f"{cols[i]}1", f"{headers[i]}", header_format)
 
-    worksheet.write("A2", consulation_detail_model.author.user.username, value_format)
-    worksheet.write("B2", consulation_detail_model.mashroot_len, value_format)
-    worksheet.write("C2", consulation_detail_model.moadel, value_format)
-    worksheet.write("D2", consulation_detail_model.arzyabi, value_format)
-    worksheet.write("E2", cdt, value_format)
-    worksheet.write("F2", cds, value_format)
-    worksheet.write("G2", cdb, value_format)
-    worksheet.write("H2", consulation_detail_model.nobat, value_format)
-    worksheet.write("I2", hozor, value_format)
-    worksheet.write("J2", consulation_detail_model.model_term_ghabl, value_format)
-    worksheet.write("K2", consulation_detail_model.moshkel_asli, value_format)
-    worksheet.write("L2", consulation_detail_model.neshanehaye_raftari, value_format)
-    worksheet.write("M2", consulation_detail_model.ahdaf_modakhele, value_format)
-    worksheet.write("N2", consulation_detail_model.farayande_modakhele, value_format)
+    student_full_name = f"{consulation_detail_model.daneshjoo_first_name} {consulation_detail_model.daneshjoo_last_name}"
+    moshaver_full_name = f"{consulation_detail_model.author.first_name} {consulation_detail_model.author.last_name}"
+    jalali_join = date2jalali(consulation_detail_model.nobat).strftime("%Y/%m/%d")
+
+    worksheet.write("A2", moshaver_full_name, value_format)
+    worksheet.write("B2", student_full_name, value_format)
+    worksheet.write(
+        "C2", consulation_detail_model.daneshjoo_student_number, value_format
+    )
+    worksheet.write("D2", consulation_detail_model.daneshjoo_meli_number, value_format)
+    worksheet.write("E2", consulation_detail_model.mashroot_len, value_format)
+    worksheet.write("F2", consulation_detail_model.moadel, value_format)
+    worksheet.write("G2", consulation_detail_model.model_term_ghabl, value_format)
+    worksheet.write("H2", cdr, value_format)
+    worksheet.write("I2", cdb, value_format)
+    worksheet.write("J2", cdt, value_format)
+    worksheet.write("K2", cds, value_format)
+    worksheet.write("L2", jalali_join, value_format)
+    worksheet.write("M2", consulation_detail_model.time, value_format)
+    worksheet.write(
+        "N2", consulation_detail_model.tedad_jalasat_moshavere, value_format
+    )
+    worksheet.write("O2", consulation_detail_model.moshkel_asli, value_format)
+    worksheet.write("P2", consulation_detail_model.moshkel_feli, value_format)
+    worksheet.write("Q2", consulation_detail_model.arzyabi, value_format)
+    worksheet.write("R2", consulation_detail_model.neshanehaye_raftari, value_format)
+    worksheet.write("S2", consulation_detail_model.ahdaf_modakhele, value_format)
+    worksheet.write("T2", consulation_detail_model.farayande_modakhele, value_format)
 
     # increase width column
-    worksheet.set_column("A:J", 30)
-    worksheet.set_column("K:N", 90)
+    worksheet.set_column("A:N", 30)
+    worksheet.set_column("O:T", 90)
     workbook.close()
     buffer.seek(0)
 
