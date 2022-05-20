@@ -10,6 +10,7 @@ from django.forms import ModelForm
 from .models import MoshaverProfile, Consulation, Reservation, Days
 from jalali_date.fields import JalaliDateField
 from jalali_date.widgets import AdminJalaliDateWidget
+from captcha.fields import CaptchaField
 
 
 class EmployeeProfileForm(ModelForm):
@@ -194,6 +195,8 @@ class ConsulationForm(forms.ModelForm):
 
 
 class DaneshjooSignupForm(UserCreationForm):
+    captcha = CaptchaField()
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["username"].label = "نام کاربری"
@@ -229,6 +232,9 @@ class DaneshjooSignupForm(UserCreationForm):
         self.fields["password2"].label = "تکرار رمز عبور"
         self.fields["password2"].widget.attrs.update({"class": "form-control"})
 
+        self.fields["captcha"].label = "لطفا حروف مقابل را بنویسید"
+        self.fields["captcha"].widget.attrs.update({"class": "form-control"})
+
     def clean_password2(self):
         password1 = self.cleaned_data["password1"]
         password2 = self.cleaned_data["password2"]
@@ -254,11 +260,13 @@ class DaneshjooSignupForm(UserCreationForm):
             "last_name",
             "password1",
             "password2",
+            "captcha",
         ]
 
 
 class ReservationForm(forms.ModelForm):
     phone_number = forms.IntegerField(required=True)
+    captcha = CaptchaField()
 
     def __init__(self, *args, **kwargs):
         super(ReservationForm, self).__init__(*args, **kwargs)
@@ -271,6 +279,9 @@ class ReservationForm(forms.ModelForm):
 
         self.fields["phone_number"].label = "شماره موبایل"
         self.fields["phone_number"].widget.attrs.update({"class": "form-control"})
+
+        self.fields["captcha"].label = "لطفا حروف مقابل را بنویسید"
+        self.fields["captcha"].widget.attrs.update({"class": "form-control text-center"})
 
         self.fields["tarikh"] = JalaliDateField(
             label=("تاریخ مشاوره"),
@@ -285,7 +296,7 @@ class ReservationForm(forms.ModelForm):
 
     class Meta:
         model = Reservation
-        fields = ["tarikh", "meli_code", "student_number", "phone_number"]
+        fields = ["tarikh", "meli_code", "student_number", "phone_number", "captcha"]
 
     def clean(self):
         meli_code = str(self.cleaned_data["meli_code"])

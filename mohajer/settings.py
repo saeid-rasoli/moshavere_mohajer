@@ -28,8 +28,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third party
     'jalali_date',
+    'captcha',
     # apps
-    'moshavere',
+    'moshavere'
 ]
 
 MIDDLEWARE = [

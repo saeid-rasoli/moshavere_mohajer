@@ -3,6 +3,7 @@
 ### pip requirement
 - django-jalali-date
 - XlsxWriter
+- django-simple-captcha
 
 ### TODO
 - [X] design homepage
@@ -40,14 +41,13 @@
 - [X] reserved marhale badd
 - [X] time delete for reservation and add to consulation log
 - [X] add consulation field added model to nazer consulation detail
-- [ ] filter nazer search consulation by date
-- [ ] profile enter info about themselves
-- [ ] export profile excel
-- [ ] moshavers have specific time for reservation
-- [ ] reserved request button for moshavere (takmil form)
-- [ ] moshavers can delete reserved moshavere
+- [X] add django-simple-captcha for signup students
+- [X] about us page and phone number when reserving about us with moshavers and cities
+- [ ] moshavers can delete and accept reserved moshavere
 - [ ] prevent duplicate reserved moshavere
+- [ ] moshavers have specific time for reservation
+- [ ] profile enter info about themselves
+- [ ] filter nazer search consulation by date
+- [ ] export profile excel
 - [ ] nazer can create new moshaver for markaz
 - [ ] give premission to nazers for edit, delete and log for moshavers in markaz moshavere
-- [ ] add django-simple-captcha for signup students
-- [ ] about us page and phone number when reserving about us with moshavers and cities

@@ -6,7 +6,7 @@
 
 {% block content %}
 {% if user.email %}
-<div class="container my-5 px-5 text-center">
+<div class="container col-sm-6 my-5 px-5 text-center">
     <form method="POST">{% csrf_token %}
             <input type="hidden" name="moshaver" value="{{ moshaver.pk }}" />
             <input type="hidden" name="city" value="{{ moshaver.city.pk }}" />
