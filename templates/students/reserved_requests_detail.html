@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load jalali_tags %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="alert alert-warning text-center">
+        <h3 class="mb-4">فرم مشاوره {{reservation.daneshjoo.first_name}} {{reservation.daneshjoo.last_name}}</h3>
+        <p>روز مشاوره: {{nobat}}</p>
+        <p>ساعت مشاوره: {{reservation.time}}</p>
+        <p>تاریخ: {{ reservation.tarikh|to_jalali:'%Y/%m/%d' }}</p>
+    </div>
+</div>
+{% endblock %}

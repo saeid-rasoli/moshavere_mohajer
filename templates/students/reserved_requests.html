@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load moshavere_extra %}
-{% load jalali_tags %}
 
-{% block title %}{% endblock %}
+{% block title %}درخواست های مشاوره{% endblock %}
 
 {% block content %}
 {% with user.username|split_ret_last:"-" as job %}
@@ -21,8 +20,7 @@
                             <th scope="col">شماره دانشجویی</th>
                             <th scope="col">کُد ملی</th>
                             <th scope="col">شماره موبایل</th>
-                            <th scope="col">تاریخ مشاوره</th>
-                            <th scope="col">روز مشاوره</th>
+                            <th scope="col">فرم</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,8 +31,7 @@
                             <td>{{ i.student_number }}</td>
                             <td>{{ i.meli_code }}</td>
                             <td>0{{ i.phone_number }}</td>
-                            <td>{{ i.tarikh|to_jalali:'%Y/%m/%d' }}</td>
-                            <td>{{ nobat.day }}</td>
+                            <td><a class="btn btn-info btn-sm" href="{% url 'moshavere:reserved_requests_detail' moshaver=i.moshaver.user.username daneshjoo=i.daneshjoo %}">ادامه</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>

@@ -43,9 +43,9 @@
 - [X] add consulation field added model to nazer consulation detail
 - [X] add django-simple-captcha for signup students
 - [X] about us page and phone number when reserving about us with moshavers and cities
+- [X] moshavers have time for reservation 8~11
 - [ ] moshavers can delete and accept reserved moshavere
 - [ ] prevent duplicate reserved moshavere
-- [ ] moshavers have specific time for reservation
 - [ ] profile enter info about themselves
 - [ ] filter nazer search consulation by date
 - [ ] export profile excel

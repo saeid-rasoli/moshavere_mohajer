@@ -7,7 +7,7 @@ from django.contrib.auth.forms import (
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
-from .models import MoshaverProfile, Consulation, Reservation, Days
+from .models import MoshaverProfile, Consulation, Reservation, Days, Time
 from jalali_date.fields import JalaliDateField
 from jalali_date.widgets import AdminJalaliDateWidget
 from captcha.fields import CaptchaField
@@ -91,6 +91,7 @@ class EmployeeProfileForm(ModelForm):
             raise forms.ValidationError("کُد ملی نا معتبر")
         elif MoshaverProfile.objects.filter(meli_code=meli_code).exists():
             raise forms.ValidationError("کاربری با این کُد ملی قبلا ثبت نام کرده است")
+
 
 class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
@@ -281,7 +282,9 @@ class ReservationForm(forms.ModelForm):
         self.fields["phone_number"].widget.attrs.update({"class": "form-control"})
 
         self.fields["captcha"].label = "لطفا حروف مقابل را بنویسید"
-        self.fields["captcha"].widget.attrs.update({"class": "form-control text-center"})
+        self.fields["captcha"].widget.attrs.update(
+            {"class": "form-control text-center"}
+        )
 
         self.fields["tarikh"] = JalaliDateField(
             label=("تاریخ مشاوره"),

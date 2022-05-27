@@ -8,23 +8,35 @@
 {% if user.email %}
 <div class="container col-sm-6 my-5 px-5 text-center">
     <form method="POST">{% csrf_token %}
-            <input type="hidden" name="moshaver" value="{{ moshaver.pk }}" />
-            <input type="hidden" name="city" value="{{ moshaver.city.pk }}" />
-            <input type="hidden" name="daneshkadeh" value="{{ moshaver.daneshkadeh.pk }}" />
+        <input type="hidden" name="moshaver" value="{{ moshaver.pk }}" />
+        <input type="hidden" name="city" value="{{ moshaver.city.pk }}" />
+        <input type="hidden" name="daneshkadeh" value="{{ moshaver.daneshkadeh.pk }}" />
+        <div class="alert alert-info">
             <p class="card-text">مشاور تحصیلی و شغلی {{ moshaver }}</p>
-            <p class="card-text mb-5">
-                <small>وقت مشاوره:
-                    {% for j in moshaver.roozhaye_hozor.all %}
-                    {{ j }}{% if not forloop.last %}, {% endif %}
+            <div class="card-text">
+                <p><small>وقت مشاوره:</small></p>
+                <hr>
+                {% for j in moshaver.roozhaye_hozor.all %}
+                {% with forloop.counter as outer_loop %}
+                <p class="mb-2">{{ j }}:
+                    {% for i in j.times.all %}
+                    <div class="form-check form-check-inline m-1">
+                        <input class="form-check-input" value="{{ i }},{{ outer_loop }}" name="reserved" type="radio"
+                            id="reserved-{{ outer_loop }}-{{ forloop.counter }}" checked>
+
+                        <label class="form-check-label me-4" for="reserved-{{ outer_loop }}-{{ forloop.counter }}">
+                            {{ i }}
+                        </label>
+                    </div>
                     {% endfor %}
-                </small>
-            </p>
-            <label for="formselect">روز مشاوره:</label>
-            <select class="form-select text-center mb-3" id="formselect" name="day" aria-label="Default select example">
-            {% for j in moshaver.roozhaye_hozor.all %}
-            <option value="{{ j }}">{{ j }}</option>
-            {% endfor %}
-            </select>
+                {% endwith %}
+                {% if not forloop.last %}
+                <hr>{% endif %}
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+
         {{ form.as_p }}
         {{ form.media }}
         <button class="btn btn-success mt-3" type="submit">ثبت و رزرو</button>

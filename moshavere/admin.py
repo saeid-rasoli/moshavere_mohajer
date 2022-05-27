@@ -9,7 +9,8 @@ from .models import (
     Nazer,
     Reservation,
     Days,
-    Nobat
+    Nobat,
+    Time
 )
 
 
@@ -54,4 +55,8 @@ class DaysAdmin(admin.ModelAdmin):
 
 @admin.register(Nobat)
 class NobatAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Time)
+class TimeAdmin(admin.ModelAdmin):
     pass

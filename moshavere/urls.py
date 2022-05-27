@@ -26,6 +26,7 @@ urlpatterns = [
     path('reservation/<daneshkadeh>/<moshaver>/', views.reservation_daneshkadeh_view, name='reservation_moshaver'),
     path('about-us/', views.about_us, name='about_us'),
     path('contact-us/', views.contact_us, name='contact_us'),
-    path('reserved-requests/<moshaver>/', views.reserved_requests, name='reserved_requests')
+    path('reserved-requests/<moshaver>/', views.reserved_requests, name='reserved_requests'),
+    path('reserved-requests/<moshaver>/<daneshjoo>/', views.reserved_requests_detail, name='reserved_requests_detail')
 
 ]
