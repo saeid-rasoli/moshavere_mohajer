@@ -18,6 +18,10 @@ S_P_B = (
 
 
 class City(models.Model):
+    class Meta:
+        verbose_name = 'شهر'
+        verbose_name_plural = 'شهر ها'
+
     name = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
@@ -25,6 +29,10 @@ class City(models.Model):
 
 
 class Daneshkadeh(models.Model):
+    class Meta:
+        verbose_name = 'دانشکده'
+        verbose_name_plural = 'دانشکده ها'
+
     name = models.CharField(max_length=200, blank=True, null=True)
     daneshgah_code = models.CharField(max_length=50, blank=True, null=True)
 
@@ -33,6 +41,10 @@ class Daneshkadeh(models.Model):
 
 
 class Time(models.Model):
+    class Meta:
+        verbose_name = 'زمان'
+        verbose_name_plural = 'زمان ها'
+
     times = models.CharField(max_length=30)
 
     def __str__(self):
@@ -40,6 +52,10 @@ class Time(models.Model):
 
 
 class Days(models.Model):
+    class Meta:
+        verbose_name = 'روز'
+        verbose_name_plural = 'روز ها'
+
     days = models.CharField(max_length=30)
     times = models.ManyToManyField(Time, blank=True)
 
@@ -48,6 +64,10 @@ class Days(models.Model):
 
 
 class MoshaverProfile(models.Model):
+    class Meta:
+        verbose_name = 'پروفایل مشاور'
+        verbose_name_plural = 'پروفایل مشاور ها'
+
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -77,6 +97,10 @@ class MoshaverProfile(models.Model):
 
 
 class Nobat(models.Model):
+    class Meta:
+        verbose_name = 'نوبت'
+        verbose_name_plural = 'نوبت ها'
+
     day = models.CharField(max_length=50, blank=True, null=True)
     daneshjoo = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     moshaver = models.ForeignKey(
@@ -88,6 +112,10 @@ class Nobat(models.Model):
 
 
 class Consulation(models.Model):
+    class Meta:
+        verbose_name = 'گزارش مشاوره'
+        verbose_name_plural = 'گزارشات مشاوره'
+
     author = models.OneToOneField(MoshaverProfile, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
     daneshjoo_first_name = models.CharField(max_length=60, null=True, blank=True)
@@ -124,6 +152,10 @@ class Consulation(models.Model):
 
 
 class MarakezMoshavere(models.Model):
+    class Meta:
+        verbose_name = 'مرکز مشاوره'
+        verbose_name_plural = 'مراکز مشاوره'
+
     city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, null=True)
     daneshgah_name = models.ForeignKey(Daneshkadeh, on_delete=models.CASCADE)
     karbari_markaz_moshavere = models.CharField(max_length=80, blank=True, null=True)
@@ -132,15 +164,11 @@ class MarakezMoshavere(models.Model):
         return self.daneshgah_name.name
 
 
-class Nazer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    markaz_moshavere = models.OneToOneField(MarakezMoshavere, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-    meli_code = models.IntegerField(unique=True, blank=True)
-
-
 class Reservation(models.Model):
+    class Meta:
+        verbose_name = 'رزرو'
+        verbose_name_plural = 'رزرو ها'
+
     daneshjoo = models.ForeignKey(User, on_delete=models.CASCADE)
     time = models.ForeignKey(Time, blank=True, null=True, on_delete=models.CASCADE)
     moshaver = models.ForeignKey(MoshaverProfile, on_delete=models.CASCADE)

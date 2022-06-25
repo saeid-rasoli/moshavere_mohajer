@@ -6,7 +6,6 @@ from .models import (
     MarakezMoshavere,
     MoshaverProfile,
     Daneshkadeh,
-    Nazer,
     Reservation,
     Days,
     Nobat,
@@ -37,12 +36,6 @@ class MoshaverProfileAdmin(admin.ModelAdmin):
 @admin.register(Daneshkadeh)
 class DaneshkadehAdmin(admin.ModelAdmin):
     pass
-
-
-@admin.register(Nazer)
-class NazerAdmin(admin.ModelAdmin):
-    pass
-
 
 @admin.register(Reservation)
 class ReservationAdmin(admin.ModelAdmin):

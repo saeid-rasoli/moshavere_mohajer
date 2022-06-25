@@ -7,7 +7,7 @@ filename = BASE_DIR / "data/daneshjoo.csv"
 
 def load_file(filename):
     csv_file = list()
-    with open(filename, "r") as f:
+    with open(filename, "r", errors='ignore') as f:
         csv_reader = reader(f)
         for row in csv_reader:
             if not row:
