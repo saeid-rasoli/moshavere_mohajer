@@ -391,11 +391,9 @@ def reserved_requests(request, moshaver):
     }
     return render(request, "students/reserved_requests.html", context)
 
+
 def reserved_requests_detail(request, moshaver, daneshjoo):
     nobat = Nobat.objects.filter(daneshjoo__username=daneshjoo).first()
     reservation = Reservation.objects.filter(daneshjoo__username=daneshjoo).first()
-    context = {
-        'nobat': nobat,
-        'reservation': reservation
-    }
+    context = {"nobat": nobat, "reservation": reservation}
     return render(request, "students/reserved_requests_detail.html", context)
