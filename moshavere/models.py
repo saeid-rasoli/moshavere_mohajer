@@ -114,7 +114,7 @@ class Nobat(models.Model):
 class Consulation(models.Model):
     class Meta:
         verbose_name = 'گزارش مشاوره'
-        verbose_name_plural = 'گزارشات مشاوره'
+        verbose_name_plural = 'گزارشات مشاوره ها'
 
     author = models.OneToOneField(MoshaverProfile, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)

@@ -76,9 +76,13 @@ def nazer(request):
             )
     else:
         consulation_model = Consulation.objects.all().order_by("-created_date")
+    
+    paginator = Paginator(consulation_model, 15)
+    page_number = request.GET.get("page")
+    records = paginator.get_page(page_number)
 
     context = {
-        "consulation": consulation_model,
+        "consulation": records,
     }
     return render(request, "forms/nazer.html", context)
 
@@ -386,8 +390,12 @@ def reserved_requests(request, moshaver):
     reserved_requests_model = Reservation.objects.filter(
         moshaver__user__username=moshaver
     )
+    paginator = Paginator(reserved_requests_model, 15)
+    page_number = request.GET.get("page")
+    records = paginator.get_page(page_number)
+
     context = {
-        "reserved_requests_model": reserved_requests_model,
+        "reserved_requests_model": records,
     }
     return render(request, "students/reserved_requests.html", context)
 

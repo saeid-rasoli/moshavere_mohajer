@@ -37,6 +37,23 @@
                     </tbody>
                 </table>
             </div>
+            <div class="pagination my-2">
+                <span class="step-links">
+                    {% if reserved_requests_model.has_previous %}
+                    <a href="?page=1">&laquo;</a>&nbsp;
+                    <a href="?page={{ reserved_requests_model.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">صفحه قبل</a>
+                    {% endif %}
+
+                    <span class="current">
+                        {{ reserved_requests_model.number }} از {{ reserved_requests_model.paginator.num_pages }}.
+                    </span>
+
+                    {% if reserved_requests_model.has_next %}
+                    <a href="?page={{ reserved_requests_model.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">صفحه بعد</a>
+                    &nbsp;<a href="?page={{ reserved_requests_model.paginator.num_pages }}">&raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
         </div>
     </div>
 </div>

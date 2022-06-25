@@ -48,6 +48,23 @@
                     </tbody>
                 </table>
             </div>
+            <div class="pagination my-2">
+                <span class="step-links">
+                    {% if consulation.has_previous %}
+                    <a href="?page=1">&laquo;</a>&nbsp;
+                    <a href="?page={{ consulation.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">صفحه قبل</a>
+                    {% endif %}
+
+                    <span class="current">
+                        {{ consulation.number }} از {{ consulation.paginator.num_pages }}.
+                    </span>
+
+                    {% if consulation.has_next %}
+                    <a href="?page={{ consulation.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">صفحه بعد</a>
+                    &nbsp;<a href="?page={{ consulation.paginator.num_pages }}">&raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
         </div>
     </div>
 </div>
